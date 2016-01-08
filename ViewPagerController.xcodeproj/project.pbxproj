@@ -25,7 +25,42 @@
 		910506AD1C3C9EA20022DE7D /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910506A91C3C9EA20022DE7D /* StartViewController.swift */; };
 		910506AF1C3CA05B0022DE7D /* ViewPagerControllerAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910506AE1C3CA05B0022DE7D /* ViewPagerControllerAppearance.swift */; };
 		913051281C3E4ABC00FE0C7A /* sample_header_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 913051271C3E4ABC00FE0C7A /* sample_header_image.jpg */; };
+		913051321C3F951000FE0C7A /* ViewPagerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 913051311C3F951000FE0C7A /* ViewPagerController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		913051361C3F951000FE0C7A /* ViewPagerControllerFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9130512F1C3F951000FE0C7A /* ViewPagerControllerFramework.framework */; };
+		913051371C3F951000FE0C7A /* ViewPagerControllerFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9130512F1C3F951000FE0C7A /* ViewPagerControllerFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9130513C1C3F957000FE0C7A /* ViewPagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910506991C3C9E910022DE7D /* ViewPagerController.swift */; };
+		9130513D1C3F957000FE0C7A /* PagerTabMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910506981C3C9E910022DE7D /* PagerTabMenuView.swift */; };
+		9130513E1C3F957000FE0C7A /* PagerContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9105069A1C3C9E910022DE7D /* PagerContainerView.swift */; };
+		9130513F1C3F957000FE0C7A /* InfiniteScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9105069D1C3C9E910022DE7D /* InfiniteScrollView.swift */; };
+		913051401C3F957000FE0C7A /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9105069E1C3C9E910022DE7D /* UIView+AutoLayout.swift */; };
+		913051411C3F957000FE0C7A /* UIColor+RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9105069B1C3C9E910022DE7D /* UIColor+RGBA.swift */; };
+		913051421C3F957000FE0C7A /* ViewPagerController+ScrollHeaderSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9105069C1C3C9E910022DE7D /* ViewPagerController+ScrollHeaderSupport.swift */; };
+		913051431C3F957000FE0C7A /* ViewPagerControllerAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910506AE1C3CA05B0022DE7D /* ViewPagerControllerAppearance.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		913051341C3F951000FE0C7A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9105067A1C3C9D420022DE7D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9130512E1C3F951000FE0C7A;
+			remoteInfo = ViewPagerControllerFramework;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9130513B1C3F951000FE0C7A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				913051371C3F951000FE0C7A /* ViewPagerControllerFramework.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		910506821C3C9D460022DE7D /* ViewPagerController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViewPagerController.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,11 +83,21 @@
 		910506A91C3C9EA20022DE7D /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		910506AE1C3CA05B0022DE7D /* ViewPagerControllerAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPagerControllerAppearance.swift; sourceTree = "<group>"; };
 		913051271C3E4ABC00FE0C7A /* sample_header_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample_header_image.jpg; sourceTree = "<group>"; };
-		913051291C3F78D300FE0C7A /* ViewPagerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewPagerController.h; sourceTree = "<group>"; };
+		9130512F1C3F951000FE0C7A /* ViewPagerControllerFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ViewPagerControllerFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		913051311C3F951000FE0C7A /* ViewPagerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewPagerController.h; sourceTree = "<group>"; };
+		913051331C3F951000FE0C7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		9105067F1C3C9D460022DE7D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				913051361C3F951000FE0C7A /* ViewPagerControllerFramework.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9130512B1C3F951000FE0C7A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -66,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				910506841C3C9D460022DE7D /* ViewPagerController */,
+				913051301C3F951000FE0C7A /* ViewPagerControllerFramework */,
 				910506831C3C9D460022DE7D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -74,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				910506821C3C9D460022DE7D /* ViewPagerController.app */,
+				9130512F1C3F951000FE0C7A /* ViewPagerControllerFramework.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -90,7 +137,6 @@
 		910506971C3C9E910022DE7D /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				913051291C3F78D300FE0C7A /* ViewPagerController.h */,
 				910506991C3C9E910022DE7D /* ViewPagerController.swift */,
 				910506981C3C9E910022DE7D /* PagerTabMenuView.swift */,
 				9105069A1C3C9E910022DE7D /* PagerContainerView.swift */,
@@ -121,7 +167,27 @@
 			name = Demo;
 			sourceTree = "<group>";
 		};
+		913051301C3F951000FE0C7A /* ViewPagerControllerFramework */ = {
+			isa = PBXGroup;
+			children = (
+				913051311C3F951000FE0C7A /* ViewPagerController.h */,
+				913051331C3F951000FE0C7A /* Info.plist */,
+			);
+			path = ViewPagerControllerFramework;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		9130512C1C3F951000FE0C7A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				913051321C3F951000FE0C7A /* ViewPagerController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		910506811C3C9D460022DE7D /* ViewPagerController */ = {
@@ -131,15 +197,35 @@
 				9105067E1C3C9D460022DE7D /* Sources */,
 				9105067F1C3C9D460022DE7D /* Frameworks */,
 				910506801C3C9D460022DE7D /* Resources */,
+				9130513B1C3F951000FE0C7A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				913051351C3F951000FE0C7A /* PBXTargetDependency */,
 			);
 			name = ViewPagerController;
 			productName = ViewPagerController;
 			productReference = 910506821C3C9D460022DE7D /* ViewPagerController.app */;
 			productType = "com.apple.product-type.application";
+		};
+		9130512E1C3F951000FE0C7A /* ViewPagerControllerFramework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9130513A1C3F951000FE0C7A /* Build configuration list for PBXNativeTarget "ViewPagerControllerFramework" */;
+			buildPhases = (
+				9130512A1C3F951000FE0C7A /* Sources */,
+				9130512B1C3F951000FE0C7A /* Frameworks */,
+				9130512C1C3F951000FE0C7A /* Headers */,
+				9130512D1C3F951000FE0C7A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ViewPagerControllerFramework;
+			productName = ViewPagerControllerFramework;
+			productReference = 9130512F1C3F951000FE0C7A /* ViewPagerControllerFramework.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -152,6 +238,9 @@
 				ORGANIZATIONNAME = xxxAIRINxxx;
 				TargetAttributes = {
 					910506811C3C9D460022DE7D = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					9130512E1C3F951000FE0C7A = {
 						CreatedOnToolsVersion = 7.2;
 					};
 				};
@@ -170,6 +259,7 @@
 			projectRoot = "";
 			targets = (
 				910506811C3C9D460022DE7D /* ViewPagerController */,
+				9130512E1C3F951000FE0C7A /* ViewPagerControllerFramework */,
 			);
 		};
 /* End PBXProject section */
@@ -183,6 +273,13 @@
 				9105068D1C3C9D4A0022DE7D /* Assets.xcassets in Resources */,
 				913051281C3E4ABC00FE0C7A /* sample_header_image.jpg in Resources */,
 				9105068B1C3C9D490022DE7D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9130512D1C3F951000FE0C7A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,7 +307,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9130512A1C3F951000FE0C7A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9130513C1C3F957000FE0C7A /* ViewPagerController.swift in Sources */,
+				9130513D1C3F957000FE0C7A /* PagerTabMenuView.swift in Sources */,
+				9130513E1C3F957000FE0C7A /* PagerContainerView.swift in Sources */,
+				9130513F1C3F957000FE0C7A /* InfiniteScrollView.swift in Sources */,
+				913051401C3F957000FE0C7A /* UIView+AutoLayout.swift in Sources */,
+				913051411C3F957000FE0C7A /* UIColor+RGBA.swift in Sources */,
+				913051421C3F957000FE0C7A /* ViewPagerController+ScrollHeaderSupport.swift in Sources */,
+				913051431C3F957000FE0C7A /* ViewPagerControllerAppearance.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		913051351C3F951000FE0C7A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9130512E1C3F951000FE0C7A /* ViewPagerControllerFramework */;
+			targetProxy = 913051341C3F951000FE0C7A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		910506891C3C9D490022DE7D /* Main.storyboard */ = {
@@ -317,6 +437,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = ViewPagerController/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -329,11 +450,54 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = ViewPagerController/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xxxAIRINxxx.ViewPagerController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		913051381C3F951000FE0C7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ViewPagerControllerFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = xxxAIRINxxx.ViewPagerControllerFramework;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		913051391C3F951000FE0C7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ViewPagerControllerFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = xxxAIRINxxx.ViewPagerControllerFramework;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -357,6 +521,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		9130513A1C3F951000FE0C7A /* Build configuration list for PBXNativeTarget "ViewPagerControllerFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				913051381C3F951000FE0C7A /* Debug */,
+				913051391C3F951000FE0C7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

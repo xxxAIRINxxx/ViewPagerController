@@ -2,7 +2,7 @@
 //  ViewPagerController.h
 //  ViewPagerController
 //
-//  Created by xxxAIRINxxx on 2016/01/05.
+//  Created by xxxAIRINxxx on 2016/01/08.
 //  Copyright © 2016 xxxAIRINxxx. All rights reserved.
 //
 
