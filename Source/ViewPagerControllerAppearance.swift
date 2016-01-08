@@ -14,42 +14,42 @@ public struct ViewPagerControllerAppearance {
     public init() {}
     
     // Header
-    var headerHeight : CGFloat = 0.0
-    var tabMenuHeight : CGFloat = 44.0
-    var headerContentsView : UIView?
+    public var headerHeight : CGFloat = 0.0
+    public var tabMenuHeight : CGFloat = 44.0
+    public var headerContentsView : UIView?
     
     // TabMenu
-    var tabMenuAppearance : TabMenuAppearance = TabMenuAppearance()
+    public var tabMenuAppearance : TabMenuAppearance = TabMenuAppearance()
     
     // ScrollHeaderSupport
-    var scrollViewMinPositionY : CGFloat = 20.0
-    var scrollViewObservingType : ObservingScrollViewType = .None
-    var scrollViewObservingDelay : CGFloat = 0.5
+    public var scrollViewMinPositionY : CGFloat = 20.0
+    public var scrollViewObservingType : ObservingScrollViewType = .None
+    public var scrollViewObservingDelay : CGFloat = 0.5
 }
 
 public struct TabMenuAppearance {
     
     public init() {}
     
-    var backgroundColor : UIColor = UIColor.blackColor()
+    public var backgroundColor : UIColor = UIColor.blackColor()
     
     // Title Layout
-    var titleMargin : CGFloat = 15.0
-    var titleMinWidth : CGFloat = 30.0
+    public var titleMargin : CGFloat = 15.0
+    public var titleMinWidth : CGFloat = 30.0
     
     // Title Color
-    var defaultTitleColor : UIColor = UIColor.grayColor()
-    var highlightedTitleColor : UIColor = UIColor.whiteColor()
-    var selectedTitleColor : UIColor = UIColor.whiteColor()
+    public var defaultTitleColor : UIColor = UIColor.grayColor()
+    public var highlightedTitleColor : UIColor = UIColor.whiteColor()
+    public var selectedTitleColor : UIColor = UIColor.whiteColor()
     
     // Title Font
-    var defaultTitleFont : UIFont = UIFont.systemFontOfSize(14)
-    var highlightedTitleFont : UIFont = UIFont.systemFontOfSize(14)
-    var selectedTitleFont : UIFont = UIFont.boldSystemFontOfSize(15)
+    public var defaultTitleFont : UIFont = UIFont.systemFontOfSize(14)
+    public var highlightedTitleFont : UIFont = UIFont.systemFontOfSize(14)
+    public var selectedTitleFont : UIFont = UIFont.boldSystemFontOfSize(15)
     
     // Selected View
-    var selectedViewBackgroundColor : UIColor = UIColor.greenColor()
-    var selectedViewInsets : UIEdgeInsets = UIEdgeInsetsMake(10, 5, 10, 5)
+    public var selectedViewBackgroundColor : UIColor = UIColor.greenColor()
+    public var selectedViewInsets : UIEdgeInsets = UIEdgeInsetsMake(10, 5, 10, 5)
     
-    var backgroundContentsView : UIView?
+    public var backgroundContentsView : UIView?
 }
