@@ -429,6 +429,8 @@ extension InfiniteScrollView: UIScrollViewDelegate {
     }
     
     public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        self.isUserScrolling = false
+        
         if let _targetItem = self.itemAtCenterPosition() {
             self.scrollToCenter(_targetItem.index, offset: 0, animated: true, animation: nil, completion: nil)
             self.infiniteDelegate?.infiniteScrollViewDidEndCenterScrolling(_targetItem)
