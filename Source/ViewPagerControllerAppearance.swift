@@ -11,6 +11,8 @@ import UIKit
 
 public struct ViewPagerControllerAppearance {
     
+    public init() {}
+    
     // Header
     var headerHeight : CGFloat = 0.0
     var tabMenuHeight : CGFloat = 44.0
@@ -26,6 +28,8 @@ public struct ViewPagerControllerAppearance {
 }
 
 public struct TabMenuAppearance {
+    
+    public init() {}
     
     var backgroundColor : UIColor = UIColor.blackColor()
     
