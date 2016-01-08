@@ -117,7 +117,8 @@ public class InfiniteScrollView: UIScrollView {
     }
     
     public override func layoutSubviews() {
-        if self.infiniteDataSource.totalItemCount() == 0 { return }
+        super.layoutSubviews()
+        guard self.infiniteDataSource.totalItemCount() > 0 else { return }
         
         var bounds = self.bounds
         let visible = bounds.size.width
@@ -220,9 +221,10 @@ public class InfiniteScrollView: UIScrollView {
     }
     
     public func reloadViews() {
-        let targetItem = self.itemAtCenterPosition()
-        if let _targetItem = targetItem {
-            self.reloadView(.Start, item: targetItem!, edge: CGRectGetMidX(targetItem!.view.frame))
+        guard self.infiniteDataSource.totalItemCount() > 0 else { return }
+        
+        if let _targetItem = self.itemAtCenterPosition() {
+            self.reloadView(.Start, item: _targetItem, edge: CGRectGetMidX(_targetItem.view.frame))
             
             var previousItem = _targetItem
             var item = self.itemAtIndex(previousItem.index + 1)
@@ -247,6 +249,8 @@ public class InfiniteScrollView: UIScrollView {
     }
     
     public func reloadView(position: XPosition, item: InfiniteItem, edge: CGFloat) {
+        guard self.infiniteDataSource.totalItemCount() > 0 else { return }
+        
         let bounds = self.bounds
         let thickness = CGFloat(ceilf(Float(self.infiniteDataSource.thicknessForIndex(item.index))))
         let view = (self.infiniteDataSource.viewForIndex(item.index))
@@ -266,6 +270,7 @@ public class InfiniteScrollView: UIScrollView {
     }
     
     public func resetWithIndex(index: Int) {
+        guard self.infiniteDataSource.totalItemCount() > 0 else { return }
         if CGRectIsEmpty(self.bounds) { return }
         
         for subview in self.subviews {
@@ -289,6 +294,7 @@ public class InfiniteScrollView: UIScrollView {
     }
     
     public func scrollToCenter(index: Int, offset: CGFloat, animated: Bool, animation: (Void -> Void)?, completion: (Void -> Void)?) {
+        guard self.infiniteDataSource.totalItemCount() > 0 else { return }
         if CGRectIsEmpty(self.bounds) { return }
         
         var bounds = self.bounds
