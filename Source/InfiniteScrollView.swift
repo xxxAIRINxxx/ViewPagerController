@@ -220,6 +220,11 @@ public class InfiniteScrollView: UIScrollView {
         self.items = self.items.map(handler)
     }
     
+    public func reset() {
+        self.subviews.forEach() { $0.removeFromSuperview() }
+        self.items.removeAll(keepCapacity: true)
+    }
+    
     public func reloadViews() {
         guard self.infiniteDataSource.totalItemCount() > 0 else { return }
         
@@ -273,11 +278,7 @@ public class InfiniteScrollView: UIScrollView {
         guard self.infiniteDataSource.totalItemCount() > 0 else { return }
         if CGRectIsEmpty(self.bounds) { return }
         
-        for subview in self.subviews {
-            subview.removeFromSuperview()
-        }
-        
-        self.items.removeAll(keepCapacity: true)
+        self.reset()
         self.placeNewItem(.Middle, edge: 0, index: index)
         self.setNeedsLayout()
     }

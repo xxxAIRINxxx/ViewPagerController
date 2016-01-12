@@ -31,12 +31,11 @@ public class PagerContainerView: UIView {
         return scrollView
     }()
     
-    private var viewControllers : [UIViewController] = []
+    // Contents
+    private var contents : [[String : UIViewController]] = []
     
-    private var identifiers : [String] = []
-    
+    // Sync ContainerView Scrolling
     private var startDraggingOffsetX : CGFloat?
-    
     private var startDraggingIndex : Int?
     
     // MARK: - Constructor
@@ -69,9 +68,29 @@ public class PagerContainerView: UIView {
     // MARK: - Public Functions
     
     public func addViewController(identifier: String, viewController: UIViewController) {
-        self.identifiers.append(identifier)
-        self.viewControllers.append(viewController)
+        self.contents.append([identifier : viewController])
         self.scrollView.reloadViews()
+    }
+    
+    public func identifierFromViewController(viewController: UIViewController) -> String? {
+        let content = self.contents.filter() { $0.values.first == viewController }.first
+        if let _content = content {
+            return _content.keys.first!
+        }
+        return nil
+    }
+    
+    public func removeContent(identifier: String) {
+        let content = self.contents.filter() { $0.keys.first == identifier }.first
+        if let _content = content {
+            self.contents = self.contents.filter() { $0 != _content }
+            
+            self.scrollView.reset()
+            self.contents.forEach() { [unowned self] in
+                self.addViewController($0.keys.first!, viewController: $0.values.first!)
+            }
+            self.reload()
+        }
     }
     
     public func scrollToCenter(index: Int, animated: Bool, animation: (Void -> Void)?, completion: (Void -> Void)?) {
@@ -92,6 +111,10 @@ public class PagerContainerView: UIView {
             return _currentItem.index
         }
         return Int.min
+    }
+    
+    public func reload() {
+        self.scrollView.reloadViews()
     }
 }
 
@@ -121,18 +144,17 @@ extension PagerContainerView {
 extension PagerContainerView: InfiniteScrollViewDataSource {
     
     public func totalItemCount() -> Int {
-        return self.identifiers.count
+        return self.contents.count
     }
     
     public func identifierForIndex(index: Int) -> String {
-        let identifier = self.identifiers[index]
-        
-        return identifier
+        let content =  self.contents[index]
+        return content.keys.first!
     }
     
     public func viewForIndex(index: Int) -> UIView {
-        let controller = self.viewControllers[index]
-        
+        let content =  self.contents[index]
+        let controller = content.values.first!
         return controller.view
     }
     
@@ -183,7 +205,8 @@ extension PagerContainerView: InfiniteScrollViewDelegate {
     }
     
     public func infiniteScrollViewDidEndCenterScrolling(item: InfiniteItem) {
-        let controller = self.viewControllers.filter(){ controller in return controller.view == item.view }.first!
+        let content = self.contents.filter() { $0.values.first?.view == item.view }.first!
+        let controller = content.values.first!
         self.didShowViewControllerHandler?(controller)
         
         guard self.startDraggingOffsetX != nil else { return }
@@ -195,7 +218,8 @@ extension PagerContainerView: InfiniteScrollViewDelegate {
     }
     
     public func infiniteScrollViewDidShowCenterItem(item: InfiniteItem) {
-        let controller = self.viewControllers.filter(){ controller in return controller.view == item.view }.first!
+        let content = self.contents.filter() { $0.values.first?.view == item.view }.first!
+        let controller = content.values.first!
         self.didShowViewControllerHandler?(controller)
     }
 }

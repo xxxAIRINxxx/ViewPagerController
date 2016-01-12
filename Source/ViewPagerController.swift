@@ -147,6 +147,19 @@ public class ViewPagerController: UIViewController {
         self.containerView.addViewController(identifier, viewController: viewController)
     }
     
+    public func removeContens(viewController: UIViewController) {
+        guard let _identifier = self.containerView.identifierFromViewController(viewController) else { return }
+        
+        if self.childViewControllers.contains(viewController) {
+            viewController.willMoveToParentViewController(nil)
+            
+            self.tabMenuView.removeContent(_identifier)
+            self.containerView.removeContent(_identifier)
+            
+            viewController.removeFromParentViewController()
+        }
+    }
+    
     // MARK: - Private Functions
     
     private func setupConstraint() {

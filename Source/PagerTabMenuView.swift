@@ -56,8 +56,7 @@ public class PagerTabMenuView: UIView {
     }()
     
     // Contents
-    private var titles : [String] = []
-    private var identifiers : [String] = []
+    private var contents : [[String : String]] = []
     
     // Selected View Layout
     private var selectedViewTopConstraint : NSLayoutConstraint!
@@ -99,14 +98,14 @@ public class PagerTabMenuView: UIView {
     private func updateUseContens() {
         let contentsRepeatCount = self.contentsRepeatCount
         if contentsRepeatCount == 0 {
-            self.useTitles = self.titles
-            self.useIdentifiers = self.identifiers
+            self.useIdentifiers = self.contents.map() { return $0.keys.first! }
+            self.useTitles = self.contents.map() { return $0.values.first! }
         } else {
             var tmpTitles: [String] = []
             var tmpIdentifiers: [String] = []
             for _ in 0..<contentsRepeatCount {
-                self.titles.forEach(){ tmpTitles.append($0) }
-                self.identifiers.forEach(){ tmpIdentifiers.append($0) }
+                self.contents.forEach(){ tmpIdentifiers.append($0.keys.first!) }
+                self.contents.forEach(){ tmpTitles.append($0.values.first!) }
             }
             self.useTitles = tmpTitles
             self.useIdentifiers = tmpIdentifiers
@@ -180,11 +179,21 @@ public class PagerTabMenuView: UIView {
     }
     
     public func addTitle(identifier: String, title: String) {
-        self.identifiers.append(identifier)
-        self.titles.append(title)
-        
-        self.updateUseContens()
-        self.scrollView.reloadViews()
+        self.contents.append([identifier : title])
+        self.reload()
+    }
+    
+    public func removeContent(identifier: String) {
+        let content = self.contents.filter() { $0.keys.first == identifier }.first
+        if let _content = content {
+            self.contents = self.contents.filter() { $0 != _content }
+            
+            self.scrollView.reset()
+            self.contents.forEach() { [unowned self] in
+                self.addTitle($0.keys.first!, title: $0.values.first!)
+            }
+            self.reload()
+        }
     }
     
     public func scrollToCenter(index: Int, animated: Bool, animation: (Void -> Void)?, completion: (Void -> Void)?) {
@@ -197,6 +206,14 @@ public class PagerTabMenuView: UIView {
         self.scrollView.scrollEnabled = true
         self.scrollView.resetWithIndex(index)
         self.updateSelectedButton(index)
+    }
+    
+    public func reload() {
+        self.updateUseContens()
+        self.scrollView.reloadViews()
+        
+        self.scrollView.resetWithIndex(0)
+        self.updateSelectedViewLayout(false)
     }
 }
 
