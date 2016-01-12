@@ -19,7 +19,7 @@
 
 ## Demo
 
-[see demo on Appetize.io](https://appetize.io/app/gbtduh7bghgt397t0e8hedd9wm?device=iphone5s&scale=75&orientation=portrait&osVersion=9.2)
+[See demo on Appetize.io](https://appetize.io/app/gbtduh7bghgt397t0e8hedd9wm?device=iphone5s&scale=75&orientation=portrait&osVersion=9.2)
 
 ## Requirements
 
