@@ -18,7 +18,7 @@ class NavSampleViewController : UIViewController {
         super.viewDidLoad()
         
         let pagerController = ViewPagerController()
-        pagerController.setParentView(self.layerView)
+        pagerController.setParentController(self, parentView: self.layerView)
         
         var appearance = ViewPagerControllerAppearance()
         

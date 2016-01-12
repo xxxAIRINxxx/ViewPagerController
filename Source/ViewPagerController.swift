@@ -126,18 +126,24 @@ public class ViewPagerController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
-    public func setParentView(parentView: UIView) {
+    public func setParentController(controller: UIViewController, parentView: UIView) {
+        controller.automaticallyAdjustsScrollViewInsets = false
+        controller.addChildViewController(self)
+        
         parentView.addSubview(self.view)
         
         self.viewTopConstraint = parentView.addPin(self.view, attribute: .Top, toView: parentView, constant: 0.0)
         parentView.addPin(self.view, attribute: .Bottom, toView: parentView, constant: 0.0)
         parentView.addPin(self.view, attribute: .Left, toView: parentView, constant: 0.0)
         parentView.addPin(self.view, attribute: .Right, toView: parentView, constant: 0.0)
+        
+        self.didMoveToParentViewController(controller)
     }
     
     public func addContents(title: String, viewController: UIViewController) {
         let identifier = NSUUID().UUIDString
         self.tabMenuView.addTitle(identifier, title: title)
+        self.addChildViewController(viewController)
         self.containerView.addViewController(identifier, viewController: viewController)
     }
     
