@@ -48,7 +48,7 @@ class DetailViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
         controller.view.clipsToBounds = true
-        controller.title = title
+        controller.title = "pushed " + self.title!
         
         self.parentController?.navigationController?.pushViewController(controller, animated: true)
     }
