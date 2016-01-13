@@ -49,7 +49,7 @@ public struct TabMenuAppearance {
     
     // Selected View
     public var selectedViewBackgroundColor : UIColor = UIColor.greenColor()
-    public var selectedViewInsets : UIEdgeInsets = UIEdgeInsetsMake(10, 5, 10, 5)
+    public var selectedViewInsets : UIEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
     
     public var backgroundContentsView : UIView?
 }
