@@ -205,10 +205,6 @@ extension PagerContainerView: InfiniteScrollViewDelegate {
     }
     
     public func infiniteScrollViewDidEndCenterScrolling(item: InfiniteItem) {
-        let content = self.contents.filter() { $0.values.first?.view == item.view }.first!
-        let controller = content.values.first!
-        self.didShowViewControllerHandler?(controller)
-        
         guard self.startDraggingOffsetX != nil else { return }
         
         if let _currentItem = self.scrollView.itemAtCenterPosition() {
