@@ -189,7 +189,7 @@ public class PagerTabMenuView: UIView {
             self.contents = self.contents.filter() { $0 != _content }
             
             self.scrollView.reset()
-            self.contents.forEach() { [unowned self] in
+            self.contents.forEach() {
                 self.addTitle($0.keys.first!, title: $0.values.first!)
             }
             self.reload()

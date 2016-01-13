@@ -86,7 +86,7 @@ public class PagerContainerView: UIView {
             self.contents = self.contents.filter() { $0 != _content }
             
             self.scrollView.reset()
-            self.contents.forEach() { [unowned self] in
+            self.contents.forEach() {
                 self.addViewController($0.keys.first!, viewController: $0.values.first!)
             }
             self.reload()
