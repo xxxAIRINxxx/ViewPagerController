@@ -65,6 +65,10 @@ class ViewController: UIViewController {
             print("call didChangeHeaderViewHeightHandler : \(height)")
         }
         
+        pagerController.didScrollContentHandler = { percentComplete in
+            print("call didScrollContentHandler : \(percentComplete)")
+        }
+        
         for title in sampleDataTitles {
             let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
             controller.view.clipsToBounds = true

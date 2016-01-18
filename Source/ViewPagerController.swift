@@ -31,6 +31,8 @@ public class ViewPagerController: UIViewController {
     
     public var didShowViewControllerObservingHandler : (UIViewController -> UIScrollView?)?
     
+    public var didScrollContentHandler : (CGFloat -> Void)?
+    
     // MARK: - Custom Settings Properties
     
     public private(set) var headerViewHeight : CGFloat = 0.0
@@ -205,6 +207,7 @@ public class ViewPagerController: UIViewController {
         
         self.containerView.syncOffsetHandler = { [weak self] index, percentComplete, scrollingTowards in
             self?.tabMenuView.syncContainerViewScrollTo(index, percentComplete: percentComplete, scrollingTowards: scrollingTowards)
+            self?.didScrollContentHandler?(percentComplete)
         }
         
         self.containerView.finishSyncHandler = { [weak self] index in

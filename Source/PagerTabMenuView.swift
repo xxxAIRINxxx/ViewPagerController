@@ -225,10 +225,9 @@ extension PagerTabMenuView {
         if self.isSyncContainerViewScrolling {
             self.scrollingTowards = scrollingTowards
             
-            let _percentComplete = percentComplete >= 0.98 ? 1.0 : percentComplete
-            self.syncOffset(_percentComplete)
-            self.syncSelectedViewWidth(_percentComplete)
-            self.syncButtons(_percentComplete)
+            self.syncOffset(percentComplete)
+            self.syncSelectedViewWidth(percentComplete)
+            self.syncButtons(percentComplete)
         } else {
             self.scrollView.scrollToCenter(currentIndex, animated: false, animation: nil, completion: nil)
             if let _currentItem = self.scrollView.itemAtCenterPosition() {
