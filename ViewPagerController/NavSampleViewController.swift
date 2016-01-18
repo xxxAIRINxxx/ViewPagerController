@@ -55,7 +55,7 @@ class NavSampleViewController : UIViewController {
             controller.view.clipsToBounds = true
             controller.title = title
             controller.parentController = self
-            pagerController.addContents(title, viewController: controller)
+            pagerController.addContent(title, viewController: controller)
         }
         
         self.pagerController = pagerController
