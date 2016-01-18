@@ -57,11 +57,11 @@ public class ViewPagerController: UIViewController {
     
     // MARK: - Private Properties
     
-    internal var headerView : UIView = UIView(frame: CGRectZero)
+    internal var headerView : UIView = UIView(frame: CGRect.zero)
     
-    internal var tabMenuView : PagerTabMenuView = PagerTabMenuView(frame: CGRectZero)
+    internal var tabMenuView : PagerTabMenuView = PagerTabMenuView(frame: CGRect.zero)
     
-    internal var containerView : PagerContainerView = PagerContainerView(frame: CGRectZero)
+    internal var containerView : PagerContainerView = PagerContainerView(frame: CGRect.zero)
     
     internal var targetNavigationBar : UINavigationBar?
     

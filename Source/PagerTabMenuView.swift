@@ -44,8 +44,8 @@ public class PagerTabMenuView: UIView {
     // MARK: - Private Properties
     
     // Views
-    private var selectedView : UIView = UIView(frame: CGRectZero)
-    private var backgroundView : UIView = UIView(frame: CGRectZero)
+    private var selectedView : UIView = UIView(frame: CGRect.zero)
+    private var backgroundView : UIView = UIView(frame: CGRect.zero)
     private lazy var scrollView : InfiniteScrollView = {
         var scrollView = InfiniteScrollView(frame: self.bounds)
         scrollView.infiniteDataSource = self
