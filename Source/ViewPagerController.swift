@@ -149,7 +149,7 @@ public class ViewPagerController: UIViewController {
         self.containerView.addViewController(identifier, viewController: viewController)
     }
     
-    public func removeConten(viewController: UIViewController) {
+    public func removeContent(viewController: UIViewController) {
         guard let _identifier = self.containerView.identifierFromViewController(viewController) else { return }
         
         if self.childViewControllers.contains(viewController) {
