@@ -40,7 +40,7 @@ class NavSampleViewController : UIViewController {
             selectedView.alpha = 1.0
         }
         
-        pagerController.didShowViewControllerObservingHandler = { controller in
+        pagerController.changeObserveScrollViewHandler = { controller in
             let detailController = controller as! DetailViewController
             
             return detailController.tableView

@@ -29,7 +29,7 @@ public class ViewPagerController: UIViewController {
     
     public var didChangeHeaderViewHeightHandler : (CGFloat -> Void)?
     
-    public var didShowViewControllerObservingHandler : (UIViewController -> UIScrollView?)?
+    public var changeObserveScrollViewHandler : (UIViewController -> UIScrollView?)?
     
     public var didScrollContentHandler : (CGFloat -> Void)?
     
@@ -220,7 +220,7 @@ public class ViewPagerController: UIViewController {
         
         self.containerView.didShowViewControllerHandler = { [weak self] controller in
             self?.didShowViewControllerHandler?(controller)
-            let scrollView = self?.didShowViewControllerObservingHandler?(controller)
+            let scrollView = self?.changeObserveScrollViewHandler?(controller)
             self?.observingScrollView = scrollView
         }
     }

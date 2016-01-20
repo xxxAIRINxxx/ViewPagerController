@@ -57,7 +57,7 @@ class ViewController: UIViewController {
             print("currentContent : \(currentController?.title)")
         }
         
-        pagerController.didShowViewControllerObservingHandler = { controller in
+        pagerController.changeObserveScrollViewHandler = { controller in
             print("call didShowViewControllerObservingHandler")
             let detailController = controller as! DetailViewController
             
