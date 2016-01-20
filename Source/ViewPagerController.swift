@@ -15,7 +15,7 @@ public enum ObservingScrollViewType {
     case NavigationBar(targetNavigationBar : UINavigationBar)
 }
 
-public class ViewPagerController: UIViewController {
+public final class ViewPagerController: UIViewController {
     
     // MARK: - Public Handler Properties
     

@@ -16,7 +16,7 @@ public enum XPosition: Int {
     case End
 }
 
-public class InfiniteItem: NSObject {
+public final class InfiniteItem: NSObject {
     var identifier : String
     var index : Int
     var thickness : CGFloat
@@ -57,7 +57,7 @@ public protocol InfiniteScrollViewDelegate: class {
     func infiniteScrollViewDidShowCenterItem(item: InfiniteItem)
 }
 
-public class InfiniteScrollView: UIScrollView {
+public final class InfiniteScrollView: UIScrollView {
 
     public weak var infiniteDataSource : InfiniteScrollViewDataSource!
     public weak var infiniteDelegate : InfiniteScrollViewDelegate?

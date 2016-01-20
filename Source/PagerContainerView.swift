@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public class PagerContainerView: UIView {
+public final class PagerContainerView: UIView {
     
     // MARK: - Public Handler Properties
     

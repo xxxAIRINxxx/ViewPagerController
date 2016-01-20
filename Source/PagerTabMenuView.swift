@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public class PagerTabMenuView: UIView {
+public final class PagerTabMenuView: UIView {
     
     // MARK: - Public Handler Properties
 
