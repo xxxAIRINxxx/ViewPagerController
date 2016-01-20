@@ -374,14 +374,14 @@ public class InfiniteScrollView: UIScrollView {
         self.scrollToCenter(index, offset: 0, animated: animated, animation: animation, completion: completion)
     }
     
-    // MARK: - Private Functions
-    
-    private func convertIndex(scrollViewIndex: Int) -> Int {
+    public func convertIndex(scrollViewIndex: Int) -> Int {
         let total = self.infiniteDataSource.totalItemCount()
         let currentIndex = scrollViewIndex >= 0 ? (scrollViewIndex % total) : (total - (-scrollViewIndex % total))
         
         return currentIndex == total ? 0 : currentIndex
     }
+  
+    // MARK: - Private Functions
     
     private func createItem(index: Int) -> InfiniteItem {
         let convertIndex = self.convertIndex(index)

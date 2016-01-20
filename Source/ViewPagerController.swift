@@ -97,7 +97,7 @@ public class ViewPagerController: UIViewController {
     public override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
-        self.tabMenuView.stopScrolling(self.containerView.currentIndex())
+        self.tabMenuView.stopScrolling(self.containerView.currentIndex() ?? 0)
         self.didEndTabMenuUserScrollingHandler?(self.tabMenuView.getSelectedView())
         self.tabMenuView.updateSelectedViewLayout(false)
     }
@@ -162,6 +162,10 @@ public class ViewPagerController: UIViewController {
         }
     }
     
+    public func currentContent() -> UIViewController? {
+        return self.containerView.currentContent()
+    }
+  
     // MARK: - Private Functions
     
     private func setupConstraint() {

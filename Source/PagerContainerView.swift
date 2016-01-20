@@ -106,15 +106,22 @@ public class PagerContainerView: UIView {
         }
     }
     
-    public func currentIndex() -> Int {
+    public func currentIndex() -> Int? {
         if let _currentItem = self.scrollView.itemAtCenterPosition() {
             return _currentItem.index
         }
-        return Int.min
+        return nil
     }
     
     public func reload() {
         self.scrollView.reloadViews()
+    }
+  
+    public func currentContent() -> UIViewController? {
+        guard let _index = self.currentIndex() where _index != Int.min else { return nil }
+      
+        let content =  self.contents[self.scrollView.convertIndex(_index)]
+        return content.values.first!
     }
 }
 

@@ -51,7 +51,10 @@ class ViewController: UIViewController {
         }
         
         pagerController.didShowViewControllerHandler = { controller in
-            print("call didShowViewControllerHandler : \(controller.title)")
+            print("call didShowViewControllerHandler")
+            print("controller : \(controller.title)")
+            let currentController = pagerController.currentContent()
+            print("currentContent : \(currentController?.title)")
         }
         
         pagerController.didShowViewControllerObservingHandler = { controller in
