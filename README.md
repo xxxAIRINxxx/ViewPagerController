@@ -25,7 +25,7 @@
 
 * Xcode 7.2+
 * iOS 8.0+
-* Swift 2.1
+* Swift 2.1+
 * iPhone Portrait (iPad Not Supported)
 
 ## Installation
@@ -35,23 +35,18 @@
 ViewPagerController is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
-```
-
-platform :ios, '8.0'
+```ruby
 use_frameworks!
 
 pod "ViewPagerController"
-
 ```
 
 ### Carthage
 
 To integrate ViewPagerController into your Xcode project using Carthage, specify it in your Cartfile:
 
-```
-
+```ruby
 github "xxxAIRINxxx/ViewPagerController"
-
 ```
 
 ## License
