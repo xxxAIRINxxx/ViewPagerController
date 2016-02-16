@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9130512E1C3F951000FE0C7A"
-               BuildableName = "ViewPagerControllerFramework.framework"
-               BlueprintName = "ViewPagerControllerFramework"
+               BlueprintIdentifier = "9188C7681C72D9D0004FFAEF"
+               BuildableName = "ViewPagerController.framework"
+               BlueprintName = "ViewPagerController"
                ReferencedContainer = "container:ViewPagerController.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9188C7721C72D9D0004FFAEF"
+               BuildableName = "ViewPagerControllerTests.xctest"
+               BlueprintName = "ViewPagerControllerTests"
+               ReferencedContainer = "container:ViewPagerController.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "9188C7681C72D9D0004FFAEF"
+            BuildableName = "ViewPagerController.framework"
+            BlueprintName = "ViewPagerController"
+            ReferencedContainer = "container:ViewPagerController.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -45,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9130512E1C3F951000FE0C7A"
-            BuildableName = "ViewPagerControllerFramework.framework"
-            BlueprintName = "ViewPagerControllerFramework"
+            BlueprintIdentifier = "9188C7681C72D9D0004FFAEF"
+            BuildableName = "ViewPagerController.framework"
+            BlueprintName = "ViewPagerController"
             ReferencedContainer = "container:ViewPagerController.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +82,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9130512E1C3F951000FE0C7A"
-            BuildableName = "ViewPagerControllerFramework.framework"
-            BlueprintName = "ViewPagerControllerFramework"
+            BlueprintIdentifier = "9188C7681C72D9D0004FFAEF"
+            BuildableName = "ViewPagerController.framework"
+            BlueprintName = "ViewPagerController"
             ReferencedContainer = "container:ViewPagerController.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
