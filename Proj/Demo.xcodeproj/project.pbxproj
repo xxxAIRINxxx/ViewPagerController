@@ -7,19 +7,50 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		91192BFC1C83FF0100051F4E /* ViewPagerController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91192BF71C83FEF100051F4E /* ViewPagerController.framework */; };
+		91192BFD1C83FF0100051F4E /* ViewPagerController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 91192BF71C83FEF100051F4E /* ViewPagerController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9188C7A51C72DACB004FFAEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9188C7A41C72DACB004FFAEF /* AppDelegate.swift */; };
 		9188C7A71C72DACB004FFAEF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9188C7A61C72DACB004FFAEF /* ViewController.swift */; };
 		9188C7AA1C72DACB004FFAEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9188C7A81C72DACB004FFAEF /* Main.storyboard */; };
 		9188C7AC1C72DACB004FFAEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9188C7AB1C72DACB004FFAEF /* Assets.xcassets */; };
 		9188C7AF1C72DACB004FFAEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9188C7AD1C72DACB004FFAEF /* LaunchScreen.storyboard */; };
-		9188C7BD1C72DB51004FFAEF /* ViewPagerController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9188C7BC1C72DB51004FFAEF /* ViewPagerController.framework */; };
-		9188C7BE1C72DB51004FFAEF /* ViewPagerController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9188C7BC1C72DB51004FFAEF /* ViewPagerController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9188C7C11C72DB6C004FFAEF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9188C7C01C72DB6C004FFAEF /* DetailViewController.swift */; };
 		9188C7C61C72DB76004FFAEF /* NavSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9188C7C21C72DB76004FFAEF /* NavSampleViewController.swift */; };
 		9188C7C71C72DB76004FFAEF /* sample_header_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9188C7C31C72DB76004FFAEF /* sample_header_image.jpg */; };
 		9188C7C81C72DB76004FFAEF /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9188C7C41C72DB76004FFAEF /* SampleData.swift */; };
 		9188C7C91C72DB76004FFAEF /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9188C7C51C72DB76004FFAEF /* StartViewController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		91192BF61C83FEF100051F4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 91192BF11C83FEF100051F4E /* ViewPagerController.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9188C7691C72D9D0004FFAEF;
+			remoteInfo = ViewPagerController;
+		};
+		91192BF81C83FEF100051F4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 91192BF11C83FEF100051F4E /* ViewPagerController.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9188C7731C72D9D0004FFAEF;
+			remoteInfo = ViewPagerControllerTests;
+		};
+		91192BFA1C83FEFB00051F4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 91192BF11C83FEF100051F4E /* ViewPagerController.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9188C7681C72D9D0004FFAEF;
+			remoteInfo = ViewPagerController;
+		};
+		91192BFE1C83FF0100051F4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 91192BF11C83FEF100051F4E /* ViewPagerController.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9188C7681C72D9D0004FFAEF;
+			remoteInfo = ViewPagerController;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		9188C7BF1C72DB52004FFAEF /* Embed Frameworks */ = {
@@ -28,7 +59,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9188C7BE1C72DB51004FFAEF /* ViewPagerController.framework in Embed Frameworks */,
+				91192BFD1C83FF0100051F4E /* ViewPagerController.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -36,6 +67,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		91192BF11C83FEF100051F4E /* ViewPagerController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ViewPagerController.xcodeproj; sourceTree = "<group>"; };
 		9188C7A11C72DACB004FFAEF /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9188C7A41C72DACB004FFAEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9188C7A61C72DACB004FFAEF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -43,7 +75,6 @@
 		9188C7AB1C72DACB004FFAEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9188C7AE1C72DACB004FFAEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9188C7B01C72DACB004FFAEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9188C7BC1C72DB51004FFAEF /* ViewPagerController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ViewPagerController.framework; path = "/Users/yos/Library/Developer/Xcode/DerivedData/ViewPagerController-bhfhbvrgjkootkdpqwkdrrbinipa/Build/Products/Debug-iphoneos/ViewPagerController.framework"; sourceTree = "<absolute>"; };
 		9188C7C01C72DB6C004FFAEF /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		9188C7C21C72DB76004FFAEF /* NavSampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavSampleViewController.swift; sourceTree = "<group>"; };
 		9188C7C31C72DB76004FFAEF /* sample_header_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample_header_image.jpg; sourceTree = "<group>"; };
@@ -56,17 +87,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9188C7BD1C72DB51004FFAEF /* ViewPagerController.framework in Frameworks */,
+				91192BFC1C83FF0100051F4E /* ViewPagerController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		91192BF21C83FEF100051F4E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				91192BF71C83FEF100051F4E /* ViewPagerController.framework */,
+				91192BF91C83FEF100051F4E /* ViewPagerControllerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9188C7981C72DACB004FFAEF = {
 			isa = PBXGroup;
 			children = (
-				9188C7BC1C72DB51004FFAEF /* ViewPagerController.framework */,
+				91192BF11C83FEF100051F4E /* ViewPagerController.xcodeproj */,
 				9188C7A31C72DACB004FFAEF /* Demo */,
 				9188C7A21C72DACB004FFAEF /* Products */,
 			);
@@ -113,6 +153,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				91192BFB1C83FEFB00051F4E /* PBXTargetDependency */,
+				91192BFF1C83FF0100051F4E /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = Demo;
@@ -145,12 +187,35 @@
 			mainGroup = 9188C7981C72DACB004FFAEF;
 			productRefGroup = 9188C7A21C72DACB004FFAEF /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 91192BF21C83FEF100051F4E /* Products */;
+					ProjectRef = 91192BF11C83FEF100051F4E /* ViewPagerController.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				9188C7A01C72DACB004FFAEF /* Demo */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		91192BF71C83FEF100051F4E /* ViewPagerController.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ViewPagerController.framework;
+			remoteRef = 91192BF61C83FEF100051F4E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		91192BF91C83FEF100051F4E /* ViewPagerControllerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ViewPagerControllerTests.xctest;
+			remoteRef = 91192BF81C83FEF100051F4E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9188C79F1C72DACB004FFAEF /* Resources */ = {
@@ -181,6 +246,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		91192BFB1C83FEFB00051F4E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ViewPagerController;
+			targetProxy = 91192BFA1C83FEFB00051F4E /* PBXContainerItemProxy */;
+		};
+		91192BFF1C83FF0100051F4E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ViewPagerController;
+			targetProxy = 91192BFE1C83FF0100051F4E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		9188C7A81C72DACB004FFAEF /* Main.storyboard */ = {
@@ -287,6 +365,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xxxAIRINxxx.Demo;
@@ -298,6 +377,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xxxAIRINxxx.Demo;
