@@ -78,7 +78,7 @@
 		9188C75F1C72D9CF004FFAEF = {
 			isa = PBXGroup;
 			children = (
-				9188C7831C72DA6F004FFAEF /* Source */,
+				9188C7831C72DA6F004FFAEF /* Sources */,
 				9188C7771C72D9D0004FFAEF /* ViewPagerControllerTests */,
 				9188C76A1C72D9D0004FFAEF /* Products */,
 				9188C7B61C72DAF4004FFAEF /* Demo.xcodeproj */,
@@ -103,7 +103,7 @@
 			path = ViewPagerControllerTests;
 			sourceTree = "<group>";
 		};
-		9188C7831C72DA6F004FFAEF /* Source */ = {
+		9188C7831C72DA6F004FFAEF /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				9188C7851C72DA6F004FFAEF /* Info.plist */,
@@ -117,8 +117,8 @@
 				9188C78A1C72DA6F004FFAEF /* ViewPagerController+ScrollHeaderSupport.swift */,
 				9188C78D1C72DA6F004FFAEF /* ViewPagerControllerAppearance.swift */,
 			);
-			name = Source;
-			path = ../Source;
+			name = Sources;
+			path = ../Sources;
 			sourceTree = "<group>";
 		};
 		9188C7B71C72DAF4004FFAEF /* Products */ = {
