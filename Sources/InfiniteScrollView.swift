@@ -162,7 +162,7 @@ public final class InfiniteScrollView: UIScrollView {
         }
         
         while (endEdge < maxVisible) {
-            index++
+            index += 1
             endEdge = self.placeNewItem(.End, edge: endEdge, index: index)
         }
         
@@ -175,7 +175,7 @@ public final class InfiniteScrollView: UIScrollView {
         }
         
         while (startEdge > minVisible) {
-            index--
+            index -= 1
             startEdge = self.placeNewItem(.Start, edge: startEdge, index: index)
         }
         
@@ -323,17 +323,20 @@ public final class InfiniteScrollView: UIScrollView {
                 isStart ? newItems.append(item) : newItems.insert(item, atIndex: 0)
                 
                 gap -= item.thickness
-                indexDelta--
+                indexDelta -= 1
             }
             
             if isStart {
                 var startEdge = CGRectGetMinX(firstItem!.view.frame)
-                for var newItemIndex = newItems.count - 1; newItemIndex >= 0 ; newItemIndex-- {
+                var newItemIndex = newItems.count - 1
+                while newItemIndex >= 0 {
                     let item = newItems[newItemIndex]
                     item.view.frame = CGRectMake(startEdge - item.thickness, 0, item.thickness, bounds.size.height)
                     startEdge = CGRectGetMinX(item.view.frame)
                     self.addSubview(item.view)
                     self.items.insert(item, atIndex: 0)
+                    
+                    newItemIndex -= 1
                 }
             } else {
                 var endEdge = CGRectGetMaxX(firstItem!.view.frame)
@@ -353,7 +356,7 @@ public final class InfiniteScrollView: UIScrollView {
             bounds.size.height
         )
         
-        self.scrolling++
+        self.scrolling += 1
         self.setContentOffset(self.contentOffset, animated: false)
         UIView.animateKeyframesWithDuration(
             animated ? 0.25 : 0,
@@ -363,7 +366,7 @@ public final class InfiniteScrollView: UIScrollView {
                 self.bounds = bounds
                 animation?()
             }, completion: { finished in
-                self.scrolling--
+                self.scrolling -= 1
                 self.setNeedsLayout()
                 self.layoutIfNeeded()
                 completion?()

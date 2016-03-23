@@ -323,7 +323,7 @@ extension PagerTabMenuView {
         button.exclusiveTouch = true
         button.setTitle(title, forState: .Normal)
         self.updateButtonTitleAttribute(button)
-        button.addTarget(self, action: Selector("tabMenuButtonTapped:"), forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(PagerTabMenuView.tabMenuButtonTapped(_:)), forControlEvents: .TouchUpInside)
         
         return button
     }
