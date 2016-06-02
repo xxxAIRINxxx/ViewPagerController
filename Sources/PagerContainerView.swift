@@ -35,6 +35,7 @@ public final class PagerContainerView: UIView {
     private var contents : [UIViewController] = []
     
     // Sync ContainerView Scrolling
+    public var scrollingIncrementalRatio: CGFloat = 1.1
     private var startDraggingOffsetX : CGFloat?
     private var startDraggingIndex : Int?
     
@@ -174,12 +175,11 @@ extension PagerContainerView: InfiniteScrollViewDelegate {
     
     public func infinitScrollViewDidScroll(scrollView: UIScrollView) {
         if let _startDraggingOffsetX = self.startDraggingOffsetX {
-            let width = scrollView.bounds.width
-            let offsetX = ceil(scrollView.contentOffset.x)
+            let offsetX = scrollView.contentOffset.x
             let scrollingTowards = _startDraggingOffsetX > offsetX
-            let percent = (offsetX - _startDraggingOffsetX) / width
-            let percentComplete = scrollingTowards == false ? percent : (1 - percent) - 1
-            let _percentComplete = percentComplete >= 0.98 ? 1.0 : percentComplete
+            let percent = (offsetX - _startDraggingOffsetX) / scrollView.bounds.width * self.scrollingIncrementalRatio
+            let percentComplete = scrollingTowards == false ? percent : (1.0 - percent) - 1.0
+            let _percentComplete =  min(1.0, percentComplete)
             
             if let _currentItem = self.scrollView.itemAtCenterPosition() {
                 self.syncOffsetHandler?(currentIndex: _currentItem.index, percentComplete: _percentComplete, scrollingTowards: scrollingTowards)

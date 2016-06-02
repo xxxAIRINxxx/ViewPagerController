@@ -70,6 +70,7 @@ public final class PagerTabMenuView: UIView {
     private var syncStartContentOffsetX : CGFloat = CGFloat.min
     private var syncContentOffsetXDistance : CGFloat = CGFloat.min
     private var scrollingTowards : Bool = false
+    private var percentComplete: CGFloat = CGFloat.min
     
     // TODO : Workaround : min item infinite scroll
     
@@ -241,6 +242,7 @@ extension PagerTabMenuView {
     internal func finishSyncContainerViewScroll(index: Int) {
         self.scrollView.userInteractionEnabled = true
         self.isSyncContainerViewScrolling = false
+        self.percentComplete = CGFloat.min
         self.updateButtonAttribute()
         
         if let _centerItem = self.scrollView.itemAtIndex(index) {
@@ -249,6 +251,9 @@ extension PagerTabMenuView {
     }
     
     internal func syncOffset(percentComplete: CGFloat) {
+        if self.percentComplete >= 1.0 { return }
+        
+        self.percentComplete = percentComplete
         let diff = self.syncContentOffsetXDistance * percentComplete
         let offset = self.scrollingTowards ? self.syncStartContentOffsetX - diff : self.syncStartContentOffsetX + diff
         
