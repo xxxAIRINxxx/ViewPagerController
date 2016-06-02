@@ -408,7 +408,6 @@ extension PagerTabMenuView {
     
     private func updateCenterItem(item: InfiniteItem) {
         self.scrollView.scrollToCenter(item.index, animated: true, animation: nil, completion: nil)
-        self.scrollView.resetWithIndex(item.index)
         self.updateSelectedButton(item.index)
         self.updateSelectedViewLayout(true)
     }
