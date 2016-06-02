@@ -35,8 +35,6 @@ public protocol InfiniteScrollViewDataSource: class {
     
     func totalItemCount() -> Int
     
-    func identifierForIndex(index: Int) -> String
-    
     func viewForIndex(index: Int) -> UIView
     
     func thicknessForIndex(index: Int) -> CGFloat
@@ -391,11 +389,10 @@ public final class InfiniteScrollView: UIScrollView {
         let bounds = self.bounds
         let thickness = CGFloat(ceilf(Float(self.infiniteDataSource.thicknessForIndex(convertIndex))))
         let view = self.infiniteDataSource.viewForIndex(convertIndex)
-        let identifier = self.infiniteDataSource.identifierForIndex(convertIndex)
         
         view.frame = CGRectMake(0, 0, thickness, bounds.size.height)
         
-        return InfiniteItem(identifier: identifier, index: index, thickness: thickness, view: view)
+        return InfiniteItem(index, thickness, view)
     }
     
     private func placeNewItem(position: XPosition, edge: CGFloat, index: Int) -> CGFloat {

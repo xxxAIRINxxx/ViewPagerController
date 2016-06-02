@@ -143,20 +143,19 @@ public final class ViewPagerController: UIViewController {
     }
     
     public func addContent(title: String, viewController: UIViewController) {
-        let identifier = NSUUID().UUIDString
-        self.tabMenuView.addTitle(identifier, title: title)
+        self.tabMenuView.addTitle(title)
         self.addChildViewController(viewController)
-        self.containerView.addViewController(identifier, viewController: viewController)
+        self.containerView.addViewController(viewController)
     }
     
     public func removeContent(viewController: UIViewController) {
-        guard let _identifier = self.containerView.identifierFromViewController(viewController) else { return }
+        guard let index = self.containerView.indexFromViewController(viewController) else { return }
         
         if self.childViewControllers.contains(viewController) {
             viewController.willMoveToParentViewController(nil)
             
-            self.tabMenuView.removeContent(_identifier)
-            self.containerView.removeContent(_identifier)
+            self.tabMenuView.removeContentAtIndex(index)
+            self.containerView.removeContent(viewController)
             
             viewController.removeFromParentViewController()
         }

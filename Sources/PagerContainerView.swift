@@ -32,7 +32,7 @@ public final class PagerContainerView: UIView {
     }()
     
     // Contents
-    private var contents : [[String : UIViewController]] = []
+    private var contents : [UIViewController] = []
     
     // Sync ContainerView Scrolling
     private var startDraggingOffsetX : CGFloat?
@@ -67,24 +67,19 @@ public final class PagerContainerView: UIView {
     
     // MARK: - Public Functions
     
-    public func addViewController(identifier: String, viewController: UIViewController) {
-        self.contents.append([identifier : viewController])
+    public func addViewController(viewController: UIViewController) {
+        self.contents.append(viewController)
         self.scrollView.reloadViews()
     }
     
-    public func identifierFromViewController(viewController: UIViewController) -> String? {
-        guard let content = self.contents.filter({ $0.values.first == viewController }).first?.keys.first else { return nil }
-        return content
+    public func indexFromViewController(viewController: UIViewController) -> Int? {
+        return self.contents.indexOf(viewController)
     }
     
-    public func removeContent(identifier: String) {
-        if let content = self.contents.filter({ $0.keys.first == identifier }).first {
-            self.contents = self.contents.filter() { $0 != content }
-            
+    public func removeContent(viewController: UIViewController) {
+        if let content = self.contents.filter({ $0 === viewController }).first {
+            self.contents = self.contents.filter() { $0 !== content }
             self.scrollView.reset()
-            self.contents.forEach() {
-                self.addViewController($0.keys.first!, viewController: $0.values.first!)
-            }
             self.reload()
         }
     }
@@ -114,8 +109,7 @@ public final class PagerContainerView: UIView {
     public func currentContent() -> UIViewController? {
         guard let _index = self.currentIndex() where _index != Int.min else { return nil }
       
-        let content = self.contents[self.scrollView.convertIndex(_index)]
-        return content.values.first
+        return self.contents[self.scrollView.convertIndex(_index)]
     }
 }
 
@@ -148,14 +142,8 @@ extension PagerContainerView: InfiniteScrollViewDataSource {
         return self.contents.count
     }
     
-    public func identifierForIndex(index: Int) -> String {
-        let content =  self.contents[index]
-        return content.keys.first!
-    }
-    
     public func viewForIndex(index: Int) -> UIView {
-        let content =  self.contents[index]
-        let controller = content.values.first!
+        let controller = self.contents[index]
         return controller.view
     }
     
@@ -213,8 +201,7 @@ extension PagerContainerView: InfiniteScrollViewDelegate {
     }
     
     public func infiniteScrollViewDidShowCenterItem(item: InfiniteItem) {
-        let content = self.contents.filter() { $0.values.first?.view == item.view }.first!
-        let controller = content.values.first!
+        guard let controller = self.contents.filter({ $0.view === item.view }).first else { return }
         self.didShowViewControllerHandler?(controller)
     }
 }
