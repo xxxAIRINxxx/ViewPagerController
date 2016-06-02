@@ -88,7 +88,7 @@ public final class InfiniteScrollView: UIScrollView {
     override public var frame: CGRect {
         get { return super.frame }
         set {
-            if CGRectIsEmpty(newValue) { return }
+            if newValue.isEmpty { return }
             
             let bounds = self.bounds
             let oldVisibleCenterX = bounds.origin.x + bounds.size.width / 2.0
@@ -97,7 +97,7 @@ public final class InfiniteScrollView: UIScrollView {
             
             let newBounds = self.bounds
             if newBounds.size.width * 5 > self.contentSize.width || newBounds.size.height < self.contentSize.height {
-                super.contentSize = CGSizeMake(newBounds.width * 5, newBounds.size.height)
+                super.contentSize = CGSize(width: newBounds.width * 5, height: newBounds.size.height)
             }
             
             let newVisibleCenterX = newBounds.origin.x + newBounds.size.width / 2.0
@@ -119,7 +119,7 @@ public final class InfiniteScrollView: UIScrollView {
         let visible = bounds.size.width
         
         if self.scrolling == 0 {
-            var delta = self.contentSize.width / 2 - CGRectGetMidX(bounds)
+            var delta = self.contentSize.width / 2 - bounds.midX
             let allow = self.pagingEnabled ? !self.decelerating : true
             
             if allow && fabs(delta) > visible {
@@ -128,7 +128,7 @@ public final class InfiniteScrollView: UIScrollView {
                 self.delegate = nil
                 
                 let contentOffset = self.contentOffset
-                self.contentOffset = CGPointMake(contentOffset.x + delta, contentOffset.y)
+                self.contentOffset = CGPoint(x: contentOffset.x + delta, y: contentOffset.y)
                 
                 self.delegate = self
                 
@@ -142,8 +142,8 @@ public final class InfiniteScrollView: UIScrollView {
             }
         }
         
-        let minVisible = CGRectGetMinX(bounds)
-        let maxVisible = CGRectGetMaxX(bounds)
+        let minVisible = bounds.minX
+        let maxVisible = bounds.maxX
         
         let lastItem = self.items.last
         var index = 0
@@ -151,7 +151,7 @@ public final class InfiniteScrollView: UIScrollView {
         
         if let _item = lastItem {
             index = _item.index
-            endEdge = CGRectGetMaxX(_item.view.frame)
+            endEdge = _item.view.frame.maxX
         } else {
             endEdge = self.placeNewItem(.Middle, edge: 0, index: 0)
         }
@@ -166,7 +166,7 @@ public final class InfiniteScrollView: UIScrollView {
         
         if let _item = firstItem {
             index = _item.index
-            startEdge = CGRectGetMinX(_item.view.frame)
+            startEdge = _item.view.frame.minX
         }
         
         while (startEdge > minVisible) {
@@ -176,14 +176,14 @@ public final class InfiniteScrollView: UIScrollView {
         
         if self.scrolling == 0 && self.items.count > 0 {
             var lasted = self.items.last
-            while (lasted != nil && CGRectGetMinX(lasted!.view.frame) >= maxVisible) {
+            while (lasted != nil && lasted!.view.frame.minX >= maxVisible) {
                 lasted!.view.removeFromSuperview()
                 self.items.removeLast()
                 lasted = self.items.last
             }
             
             var firsted = self.items.first
-            while (firsted != nil && CGRectGetMaxX(firsted!.view.frame) <= minVisible) {
+            while (firsted != nil && firsted!.view.frame.maxX <= minVisible) {
                 firsted!.view.removeFromSuperview()
                 self.items.removeAtIndex(0)
                 firsted = self.items.first
@@ -202,13 +202,11 @@ public final class InfiniteScrollView: UIScrollView {
     // MARK: - Public Functions
     
     public func itemAtView(view: UIView) -> InfiniteItem? {
-        let item = self.items.filter() { item in return item.view == view }
-        return item.first
+        return self.items.filter() { item in return item.view === view }.first
     }
     
     public func itemAtIndex(index: Int) -> InfiniteItem? {
-        let item = self.items.filter() { item in return item.index == index }
-        return item.first
+        return self.items.filter() { item in return item.index == index }.first
     }
     
     public func updateItems(handler: (InfiniteItem -> InfiniteItem)) {
@@ -224,13 +222,13 @@ public final class InfiniteScrollView: UIScrollView {
         guard self.infiniteDataSource.totalItemCount() > 0 else { return }
         
         if let _targetItem = self.itemAtCenterPosition() {
-            self.reloadView(.Start, item: _targetItem, edge: CGRectGetMidX(_targetItem.view.frame))
+            self.reloadView(.Start, item: _targetItem, edge: _targetItem.view.frame.midX)
             
             var previousItem = _targetItem
             var item = self.itemAtIndex(previousItem.index + 1)
             
             while (item != nil) {
-                self.reloadView(.End, item: item!, edge: CGRectGetMaxX(previousItem.view.frame))
+                self.reloadView(.End, item: item!, edge: previousItem.view.frame.maxX)
                 previousItem = item!
                 item = self.itemAtIndex(previousItem.index + 1)
             }
@@ -239,7 +237,7 @@ public final class InfiniteScrollView: UIScrollView {
             item = self.itemAtIndex(previousItem.index - 1)
             
             while (item != nil) {
-                self.reloadView(.End, item: item!, edge: CGRectGetMaxX(previousItem.view.frame))
+                self.reloadView(.End, item: item!, edge: previousItem.view.frame.maxX)
                 previousItem = item!
                 item = self.itemAtIndex(previousItem.index - 1)
             }
@@ -257,11 +255,11 @@ public final class InfiniteScrollView: UIScrollView {
         
         switch position {
         case .Start:
-            item.view.frame = CGRectMake(edge - thickness, 0, thickness, bounds.size.height)
+            item.view.frame = CGRect(x: edge - thickness, y: 0, width: thickness, height: bounds.size.height)
         case .Middle:
-            item.view.frame = CGRectMake(edge - thickness / 2.0, 0, thickness, bounds.size.height)
+            item.view.frame = CGRect(x: edge - thickness / 2.0, y: 0, width: thickness, height: bounds.size.height)
         case .End:
-            item.view.frame = CGRectMake(edge, 0, thickness, bounds.size.height)
+            item.view.frame = CGRect(x: edge, y: 0, width: thickness, height: bounds.size.height)
         }
         
         item.view.removeFromSuperview()
@@ -270,7 +268,7 @@ public final class InfiniteScrollView: UIScrollView {
     
     public func resetWithIndex(index: Int) {
         guard self.infiniteDataSource.totalItemCount() > 0 else { return }
-        if CGRectIsEmpty(self.bounds) { return }
+        if self.bounds.isEmpty { return }
         
         self.reset()
         self.placeNewItem(.Middle, edge: 0, index: index)
@@ -279,9 +277,9 @@ public final class InfiniteScrollView: UIScrollView {
     
     public func itemAtCenterPosition() -> InfiniteItem? {
         let bounds = self.bounds
-        let mark: CGFloat = CGRectGetMidX(bounds)
+        let mark: CGFloat = bounds.midX
         for item in self.items {
-            if CGRectGetMinX(item.view.frame) <= mark && CGRectGetMaxX(item.view.frame) >= mark {
+            if item.view.frame.minX <= mark && item.view.frame.maxX >= mark {
                 return item
             }
         }
@@ -290,7 +288,7 @@ public final class InfiniteScrollView: UIScrollView {
     
     public func scrollToCenter(index: Int, offset: CGFloat, animated: Bool, animation: (Void -> Void)?, completion: (Void -> Void)?) {
         guard self.infiniteDataSource.totalItemCount() > 0 else { return }
-        if CGRectIsEmpty(self.bounds) { return }
+        if self.bounds.isEmpty { return }
         
         var bounds = self.bounds
         let visible = bounds.size.width
@@ -321,33 +319,33 @@ public final class InfiniteScrollView: UIScrollView {
             }
             
             if isStart {
-                var startEdge = CGRectGetMinX(firstItem!.view.frame)
+                var startEdge = firstItem!.view.frame.minX
                 var newItemIndex = newItems.count - 1
                 while newItemIndex >= 0 {
                     let item = newItems[newItemIndex]
-                    item.view.frame = CGRectMake(startEdge - item.thickness, 0, item.thickness, bounds.size.height)
-                    startEdge = CGRectGetMinX(item.view.frame)
+                    item.view.frame = CGRect(x: startEdge - item.thickness, y: 0, width: item.thickness, height: bounds.size.height)
+                    startEdge = item.view.frame.minX
                     self.addSubview(item.view)
                     self.items.insert(item, atIndex: 0)
                     
                     newItemIndex -= 1
                 }
             } else {
-                var endEdge = CGRectGetMaxX(firstItem!.view.frame)
+                var endEdge = firstItem!.view.frame.maxX
                 self.items = newItems.map() { item in
-                    item.view.frame = CGRectMake(endEdge, 0, item.thickness, bounds.size.height)
-                    endEdge = CGRectGetMaxX(item.view.frame)
+                    item.view.frame = CGRect(x: endEdge, y: 0, width: item.thickness, height: bounds.size.height)
+                    endEdge = item.view.frame.maxX
                     self.addSubview(item.view)
                     return item
                 }
             }
         }
         
-        bounds = CGRectMake(
-            CGRectGetMinX(targetItem!.view.frame) - (bounds.size.width - targetItem!.thickness) / 2.0 + offset,
-            0,
-            bounds.size.width,
-            bounds.size.height
+        bounds = CGRect(
+            x: targetItem!.view.frame.minX - (bounds.size.width - targetItem!.thickness) / 2.0 + offset,
+            y: 0,
+            width: bounds.size.width,
+            height: bounds.size.height
         )
         
         self.scrolling += 1
@@ -386,7 +384,7 @@ public final class InfiniteScrollView: UIScrollView {
         let thickness = CGFloat(ceilf(Float(self.infiniteDataSource.thicknessForIndex(convertIndex))))
         let view = self.infiniteDataSource.viewForIndex(convertIndex)
         
-        view.frame = CGRectMake(0, 0, thickness, bounds.size.height)
+        view.frame = CGRect(x: 0, y: 0, width: thickness, height: bounds.size.height)
         
         return InfiniteItem(index, thickness, view)
     }
@@ -399,17 +397,17 @@ public final class InfiniteScrollView: UIScrollView {
             item.view.frame.origin.x = edge - item.thickness
             self.addSubview(item.view)
             self.items.insert(item, atIndex: 0)
-            return CGRectGetMinX(item.view.frame)
+            return item.view.frame.minX
         case .Middle:
             item.view.frame.origin.x = bounds.origin.x + (bounds.size.width - item.thickness) / 2.0
             self.addSubview(item.view)
             self.items.append(item)
-            return CGRectGetMaxX(item.view.frame)
+            return item.view.frame.maxX
         case .End:
             item.view.frame.origin.x = edge
             self.addSubview(item.view)
             self.items.append(item)
-            return CGRectGetMaxX(item.view.frame)
+            return item.view.frame.maxX
         }
     }
 }

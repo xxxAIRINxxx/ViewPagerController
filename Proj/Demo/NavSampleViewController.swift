@@ -29,7 +29,7 @@ class NavSampleViewController : UIViewController {
         
         appearance.tabMenuAppearance.backgroundColor = UIColor.darkGrayColor()
         appearance.tabMenuAppearance.selectedViewBackgroundColor = UIColor.blueColor()
-        appearance.tabMenuAppearance.selectedViewInsets = UIEdgeInsetsMake(39, 0, 0, 0)
+        appearance.tabMenuAppearance.selectedViewInsets = UIEdgeInsets(top: 39, left: 0, bottom: 0, right: 0)
         
         pagerController.updateAppearance(appearance)
         

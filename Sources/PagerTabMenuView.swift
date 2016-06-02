@@ -229,8 +229,8 @@ extension PagerTabMenuView {
                     self.syncStartIndex = _currentItem.index
                     self.syncNextIndex = _nextItem.index
                     self.syncStartContentOffsetX = self.scrollView.contentOffset.x
-                    let startOffsetX = CGRectGetMidX(_currentItem.view.frame)
-                    let endOffsetX = CGRectGetMidX(_nextItem.view.frame)
+                    let startOffsetX = _currentItem.view.frame.midX
+                    let endOffsetX = _nextItem.view.frame.midX
                     self.scrollingTowards = scrollingTowards
                     self.syncContentOffsetXDistance = scrollingTowards ? startOffsetX - endOffsetX : endOffsetX - startOffsetX
                 }
@@ -252,7 +252,7 @@ extension PagerTabMenuView {
         let diff = self.syncContentOffsetXDistance * percentComplete
         let offset = self.scrollingTowards ? self.syncStartContentOffsetX - diff : self.syncStartContentOffsetX + diff
         
-        self.scrollView.contentOffset = CGPointMake(offset, 0)
+        self.scrollView.contentOffset = CGPoint(x: offset, y: 0)
     }
     
     internal func syncSelectedViewWidth(percentComplete: CGFloat) {
@@ -309,7 +309,7 @@ extension PagerTabMenuView {
 extension PagerTabMenuView {
     
     private func createTitleButton(title: String) -> UIButton {
-        let button = UIButton(frame: CGRectMake(0.0, 0.0, self.titleMinWidth, self.frame.height))
+        let button = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: self.titleMinWidth, height: self.frame.height))
         button.exclusiveTouch = true
         button.setTitle(title, forState: .Normal)
         self.updateButtonTitleAttribute(button)

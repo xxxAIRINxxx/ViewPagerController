@@ -174,7 +174,7 @@ extension PagerContainerView: InfiniteScrollViewDelegate {
     
     public func infinitScrollViewDidScroll(scrollView: UIScrollView) {
         if let _startDraggingOffsetX = self.startDraggingOffsetX {
-            let width = CGRectGetWidth(scrollView.bounds)
+            let width = scrollView.bounds.width
             let offsetX = ceil(scrollView.contentOffset.x)
             let scrollingTowards = _startDraggingOffsetX > offsetX
             let percent = (offsetX - _startDraggingOffsetX) / width

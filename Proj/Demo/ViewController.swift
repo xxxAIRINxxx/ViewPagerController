@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         appearance.headerContentsView = imageView
         
         appearance.tabMenuAppearance.selectedViewBackgroundColor = UIColor.greenColor()
-        appearance.tabMenuAppearance.selectedViewInsets = UIEdgeInsetsMake(10, 5, 10, 5)
+        appearance.tabMenuAppearance.selectedViewInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
         
         pagerController.updateAppearance(appearance)
         
