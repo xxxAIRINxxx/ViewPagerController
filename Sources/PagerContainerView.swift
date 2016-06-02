@@ -73,17 +73,13 @@ public final class PagerContainerView: UIView {
     }
     
     public func identifierFromViewController(viewController: UIViewController) -> String? {
-        let content = self.contents.filter() { $0.values.first == viewController }.first
-        if let _content = content {
-            return _content.keys.first!
-        }
-        return nil
+        guard let content = self.contents.filter({ $0.values.first == viewController }).first?.keys.first else { return nil }
+        return content
     }
     
     public func removeContent(identifier: String) {
-        let content = self.contents.filter() { $0.keys.first == identifier }.first
-        if let _content = content {
-            self.contents = self.contents.filter() { $0 != _content }
+        if let content = self.contents.filter({ $0.keys.first == identifier }).first {
+            self.contents = self.contents.filter() { $0 != content }
             
             self.scrollView.reset()
             self.contents.forEach() {
@@ -107,10 +103,8 @@ public final class PagerContainerView: UIView {
     }
     
     public func currentIndex() -> Int? {
-        if let _currentItem = self.scrollView.itemAtCenterPosition() {
-            return _currentItem.index
-        }
-        return nil
+        guard let currentItem = self.scrollView.itemAtCenterPosition() else { return nil }
+        return currentItem.index
     }
     
     public func reload() {
@@ -120,8 +114,8 @@ public final class PagerContainerView: UIView {
     public func currentContent() -> UIViewController? {
         guard let _index = self.currentIndex() where _index != Int.min else { return nil }
       
-        let content =  self.contents[self.scrollView.convertIndex(_index)]
-        return content.values.first!
+        let content = self.contents[self.scrollView.convertIndex(_index)]
+        return content.values.first
     }
 }
 
@@ -178,9 +172,7 @@ extension PagerContainerView: InfiniteScrollViewDelegate {
         self.startDraggingOffsetX? += delta
     }
     
-    public func infiniteScrollViewWillBeginDecelerating(scrollView: UIScrollView) {
-        
-    }
+    public func infiniteScrollViewWillBeginDecelerating(scrollView: UIScrollView) {}
     
     public func infiniteScrollViewWillBeginDragging(scrollView: UIScrollView) {
         if let _currentItem = self.scrollView.itemAtCenterPosition() {

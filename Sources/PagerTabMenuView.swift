@@ -184,9 +184,8 @@ public final class PagerTabMenuView: UIView {
     }
     
     public func removeContent(identifier: String) {
-        let content = self.contents.filter() { $0.keys.first == identifier }.first
-        if let _content = content {
-            self.contents = self.contents.filter() { $0 != _content }
+        if let content = self.contents.filter({ $0.keys.first == identifier }).first {
+            self.contents = self.contents.filter() { $0 != content }
             
             self.scrollView.reset()
             self.contents.forEach() {
