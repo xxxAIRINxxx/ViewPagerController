@@ -16,18 +16,15 @@ public enum XPosition: Int {
     case End
 }
 
-public final class InfiniteItem: NSObject {
-    var identifier : String
-    var index : Int
-    var thickness : CGFloat
-    var view : UIView
+public struct InfiniteItem {
+    let index : Int
+    let thickness : CGFloat
+    let view : UIView
     
-    public init(identifier: String, index: Int, thickness: CGFloat, view: UIView) {
-        self.identifier = identifier
+    public init(_ index: Int, _ thickness: CGFloat, _ view: UIView) {
         self.index = index
         self.thickness = thickness
         self.view = view
-        super.init()
     }
 }
 
@@ -269,7 +266,6 @@ public final class InfiniteScrollView: UIScrollView {
         
         item.view.removeFromSuperview()
         self.addSubview(view)
-        item.view = view
     }
     
     public func resetWithIndex(index: Int) {

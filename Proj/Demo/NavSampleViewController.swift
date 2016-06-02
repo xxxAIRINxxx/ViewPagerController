@@ -60,6 +60,13 @@ class NavSampleViewController : UIViewController {
         }
         
         self.pagerController = pagerController
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "remove", style: .Plain, target: self, action: #selector(NavSampleViewController.remove))
+    }
+    
+    @objc private func remove() {
+        guard let c = self.pagerController?.childViewControllers.first else { return }
+        self.pagerController?.removeContent(c)
     }
     
     override func viewWillDisappear(animated: Bool) {
