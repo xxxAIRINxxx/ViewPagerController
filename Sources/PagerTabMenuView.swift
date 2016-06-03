@@ -246,7 +246,7 @@ extension PagerTabMenuView {
         self.updateButtonAttribute()
         
         if let _centerItem = self.scrollView.itemAtIndex(index) {
-            self.updateCenterItem(_centerItem)
+            self.updateCenterItem(_centerItem, animated: false)
         }
     }
     
@@ -325,7 +325,7 @@ extension PagerTabMenuView {
     
     public func tabMenuButtonTapped(sender: UIButton) {
         if let _item = self.scrollView.itemAtView(sender) {
-            self.updateCenterItem(_item)
+            self.updateCenterItem(_item, animated: true)
             self.selectedIndexHandler?(_item.index)
         }
     }
@@ -406,10 +406,10 @@ extension PagerTabMenuView {
         self.selectedViewWidthConstraint.constant = _centerItem.thickness - inset
     }
     
-    private func updateCenterItem(item: InfiniteItem) {
-        self.scrollView.scrollToCenter(item.index, animated: true, animation: nil, completion: nil)
+    private func updateCenterItem(item: InfiniteItem, animated: Bool) {
+        self.scrollView.scrollToCenter(item.index, animated: animated, animation: nil, completion: nil)
         self.updateSelectedButton(item.index)
-        self.updateSelectedViewLayout(true)
+        self.updateSelectedViewLayout(animated)
     }
     
     private func updateSelectedButton(index: Int) {
@@ -470,7 +470,7 @@ extension PagerTabMenuView: InfiniteScrollViewDelegate {
     public func infiniteScrollViewDidEndCenterScrolling(item: InfiniteItem) {
         guard !self.isSyncContainerViewScrolling else { return }
         
-        self.updateCenterItem(item)
+        self.updateCenterItem(item, animated: false)
         self.didEndTabMenuScrollingHandler?(self.selectedView)
         self.selectedIndexHandler?(item.index)
     }
@@ -478,6 +478,6 @@ extension PagerTabMenuView: InfiniteScrollViewDelegate {
     public func infiniteScrollViewDidShowCenterItem(item: InfiniteItem) {
         guard !self.isSyncContainerViewScrolling else { return }
         
-        self.updateCenterItem(item)
+        self.updateCenterItem(item, animated: false)
     }
 }
