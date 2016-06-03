@@ -243,15 +243,17 @@ public final class InfiniteScrollView: UIScrollView {
             }
             
             self.setNeedsLayout()
+            self.layoutIfNeeded()
         }
     }
     
     public func reloadView(position: XPosition, item: InfiniteItem, edge: CGFloat) {
         guard self.infiniteDataSource.totalItemCount() > 0 else { return }
-        
+      
+        let convertIndex = self.convertIndex(item.index)
         let bounds = self.bounds
-        let thickness = CGFloat(ceilf(Float(self.infiniteDataSource.thicknessForIndex(item.index))))
-        let view = (self.infiniteDataSource.viewForIndex(item.index))
+        let thickness = CGFloat(ceilf(Float(self.infiniteDataSource.thicknessForIndex(convertIndex))))
+        let view = (self.infiniteDataSource.viewForIndex(convertIndex))
         
         switch position {
         case .Start:
@@ -273,6 +275,7 @@ public final class InfiniteScrollView: UIScrollView {
         self.reset()
         self.placeNewItem(.Middle, edge: 0, index: index)
         self.setNeedsLayout()
+        self.layoutIfNeeded()
     }
     
     public func itemAtCenterPosition() -> InfiniteItem? {
@@ -289,7 +292,10 @@ public final class InfiniteScrollView: UIScrollView {
     public func scrollToCenter(index: Int, offset: CGFloat, animated: Bool, animation: (Void -> Void)?, completion: (Void -> Void)?) {
         guard self.infiniteDataSource.totalItemCount() > 0 else { return }
         if self.bounds.isEmpty { return }
-        
+      
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
+      
         var bounds = self.bounds
         let visible = bounds.size.width
         
@@ -350,11 +356,9 @@ public final class InfiniteScrollView: UIScrollView {
         
         self.scrolling += 1
         self.setContentOffset(self.contentOffset, animated: false)
-        UIView.animateKeyframesWithDuration(
-            animated ? 0.25 : 0,
-            delay: 0,
-            options: .BeginFromCurrentState,
-            animations: { () -> Void in
+      
+        if animated {
+            UIView.animateKeyframesWithDuration(0.25, delay: 0, options: .BeginFromCurrentState, animations: {
                 self.bounds = bounds
                 animation?()
             }, completion: { finished in
@@ -362,7 +366,12 @@ public final class InfiniteScrollView: UIScrollView {
                 self.setNeedsLayout()
                 self.layoutIfNeeded()
                 completion?()
-        })
+            })
+        } else {
+            self.bounds = bounds
+            self.scrolling -= 1
+            completion?()
+        }
     }
     
     public func scrollToCenter(index: Int, animated: Bool, animation: (Void -> Void)?, completion: (Void -> Void)?) {
