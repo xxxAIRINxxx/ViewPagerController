@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ViewPagerController"
-  s.version      = "1.2.0"
+  s.version      = "1.2.1"
   s.summary      = "Infinite menu & view paging Controller. written in Swift."
   s.homepage     = "https://github.com/xxxAIRINxxx/ViewPagerController"
   s.license      = 'MIT'
