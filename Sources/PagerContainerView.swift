@@ -94,7 +94,10 @@ public final class PagerContainerView: UIView {
             } else {
                 self.scrollView.resetWithIndex(index - 1)
             }
-            self.scrollView.scrollToCenter(index, animated: animated, animation: animation, completion: completion)
+            self.scrollView.scrollToCenter(index, animated: animated, animation: animation) { [weak self] in
+                self?.scrollView.resetWithIndex(index)
+                completion?()
+            }
         }
     }
     
