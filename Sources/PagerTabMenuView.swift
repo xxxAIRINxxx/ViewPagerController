@@ -183,7 +183,6 @@ public final class PagerTabMenuView: UIView {
     
     public func removeContentAtIndex(index: Int) {
         self.contents.removeAtIndex(index)
-        self.scrollView.reset()
         self.reload()
     }
     
@@ -201,9 +200,8 @@ public final class PagerTabMenuView: UIView {
     
     public func reload() {
         self.updateUseContens()
-        self.scrollView.reloadViews()
-        
         self.scrollView.resetWithIndex(0)
+        self.updateSelectedButton(0)
         self.updateSelectedViewLayout(false)
     }
 }
