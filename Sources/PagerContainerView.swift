@@ -107,7 +107,7 @@ public final class PagerContainerView: UIView {
     }
     
     public func reload() {
-        self.scrollView.reloadViews()
+        self.scrollView.resetWithIndex(0)
     }
   
     public func currentContent() -> UIViewController? {
