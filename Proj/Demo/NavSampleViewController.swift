@@ -25,10 +25,10 @@ class NavSampleViewController : UIViewController {
         
         appearance.tabMenuHeight = 44.0
         appearance.scrollViewMinPositionY = 20.0
-        appearance.scrollViewObservingType = .NavigationBar(targetNavigationBar: self.navigationController!.navigationBar)
+        appearance.scrollViewObservingType = .navigationBar(targetNavigationBar: self.navigationController!.navigationBar)
         
-        appearance.tabMenuAppearance.backgroundColor = UIColor.darkGrayColor()
-        appearance.tabMenuAppearance.selectedViewBackgroundColor = UIColor.blueColor()
+        appearance.tabMenuAppearance.backgroundColor = UIColor.darkGray
+        appearance.tabMenuAppearance.selectedViewBackgroundColor = UIColor.blue
         appearance.tabMenuAppearance.selectedViewInsets = UIEdgeInsets(top: 39, left: 0, bottom: 0, right: 0)
         
         pagerController.updateAppearance(appearance)
@@ -52,7 +52,7 @@ class NavSampleViewController : UIViewController {
         }
         
         for title in sampleDataTitles {
-            let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
+            let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
             controller.view.clipsToBounds = true
             controller.title = title
             controller.parentController = self
@@ -61,15 +61,15 @@ class NavSampleViewController : UIViewController {
         
         self.pagerController = pagerController
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "remove", style: .Plain, target: self, action: #selector(NavSampleViewController.remove))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "remove", style: .plain, target: self, action: #selector(NavSampleViewController.remove))
     }
     
-    @objc private func remove() {
+    @objc fileprivate func remove() {
         guard let c = self.pagerController?.childViewControllers.first else { return }
         self.pagerController?.removeContent(c)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         self.pagerController?.resetNavigationBarHeight(true)

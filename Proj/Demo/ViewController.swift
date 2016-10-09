@@ -25,14 +25,14 @@ class ViewController: UIViewController {
         
         appearance.headerHeight = 200.0
         appearance.scrollViewMinPositionY = 20.0
-        appearance.scrollViewObservingType = .Header
+        appearance.scrollViewObservingType = .header
         
         let imageView = UIImageView(image: UIImage(named: "sample_header_image.jpg"))
-        imageView.contentMode = .ScaleAspectFill
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         appearance.headerContentsView = imageView
         
-        appearance.tabMenuAppearance.selectedViewBackgroundColor = UIColor.greenColor()
+        appearance.tabMenuAppearance.selectedViewBackgroundColor = UIColor.green
         appearance.tabMenuAppearance.selectedViewInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
         
         pagerController.updateAppearance(appearance)
@@ -74,7 +74,7 @@ class ViewController: UIViewController {
         }
         
         for title in sampleDataTitles {
-            let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
+            let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
             controller.view.clipsToBounds = true
             controller.title = title
             controller.parentController = self
@@ -84,14 +84,14 @@ class ViewController: UIViewController {
         self.pagerController = pagerController
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = false
     }
 }
 
