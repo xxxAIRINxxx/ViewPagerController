@@ -13,20 +13,20 @@ extension ViewPagerController {
     
     // MARK: - Override (KVO)
    
-    override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if (keyPath == "contentOffset") {
             
-            let old = change?[NSKeyValueChangeOldKey]?.CGPointValue
-            let new = change?[NSKeyValueChangeNewKey]?.CGPointValue
+            let old = (change?[NSKeyValueChangeKey.oldKey] as AnyObject).cgPointValue
+            let new = (change?[NSKeyValueChangeKey.newKey] as AnyObject).cgPointValue
             
-            guard let _old = old, _new = new else { return }
+            guard let _old = old, let _new = new else { return }
             
             switch self.scrollViewObservingType {
-            case .Header:
+            case .header:
                 self.updateHeaderViewHeight(_old, currentOffset: _new)
-            case .NavigationBar:
+            case .navigationBar:
                 self.updateNavigationBarHeight(_old, currentOffset: _new)
-            case .None:
+            case .none:
                 break
             }
         }
@@ -34,17 +34,17 @@ extension ViewPagerController {
     
     // MARK: - Public Functions
     
-    public func resetHeaderViewHeight(animated: Bool) {
+    public func resetHeaderViewHeight(_ animated: Bool) {
         self.headerViewHeightConstraint.constant = self.headerViewHeight
-        UIView.animateWithDuration(animated ? 0.25 : 0, animations: {
+        UIView.animate(withDuration: animated ? 0.25 : 0, animations: {
             self.view.layoutIfNeeded()
         })
     }
     
-    public func resetNavigationBarHeight(animated: Bool) {
+    public func resetNavigationBarHeight(_ animated: Bool) {
         if let _navigationBar = self.targetNavigationBar {
             self.viewTopConstraint.constant = 0
-            UIView.animateWithDuration(animated ? 0.25 : 0, animations: {
+            UIView.animate(withDuration: animated ? 0.25 : 0, animations: {
                 _navigationBar.frame.origin.y = self.navigationBarBaselineOriginY()
                self.view.layoutIfNeeded()
             })
@@ -53,7 +53,7 @@ extension ViewPagerController {
     
     // MARK: - Private Functions
     
-    private func updateHeaderViewHeight(prevOffset: CGPoint, currentOffset: CGPoint) {
+    fileprivate func updateHeaderViewHeight(_ prevOffset: CGPoint, currentOffset: CGPoint) {
         let maxHeaderHeight = self.headerViewHeight
         let minHeaderHeight = self.scrollViewMinPositionY
         
@@ -86,7 +86,7 @@ extension ViewPagerController {
         self.didChangeHeaderViewHeightHandler?(self.headerViewHeightConstraint.constant)
     }
     
-    private func updateNavigationBarHeight(prevOffset: CGPoint, currentOffset: CGPoint) {
+    fileprivate func updateNavigationBarHeight(_ prevOffset: CGPoint, currentOffset: CGPoint) {
         if let _navigationBar = self.targetNavigationBar {
             let minHeaderHeight = self.scrollViewMinPositionY
             let baselineOriginY = self.navigationBarBaselineOriginY()
@@ -125,7 +125,7 @@ extension ViewPagerController {
         }
     }
     
-    private func navigationBarBaselineOriginY() -> CGFloat {
-        return UIApplication.sharedApplication().statusBarFrame.size.height
+    fileprivate func navigationBarBaselineOriginY() -> CGFloat {
+        return UIApplication.shared.statusBarFrame.size.height
     }
 }

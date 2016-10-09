@@ -11,9 +11,9 @@ import Foundation
 import UIKit
 
 public enum XPosition: Int {
-    case Start
-    case Middle
-    case End
+    case start
+    case middle
+    case end
 }
 
 public struct InfiniteItem {
@@ -32,24 +32,24 @@ public protocol InfiniteScrollViewDataSource: class {
     
     func totalItemCount() -> Int
     
-    func viewForIndex(index: Int) -> UIView
+    func viewForIndex(_ index: Int) -> UIView
     
-    func thicknessForIndex(index: Int) -> CGFloat
+    func thicknessForIndex(_ index: Int) -> CGFloat
 }
 
 public protocol InfiniteScrollViewDelegate: class {
     
-    func updateContentOffset(delta: CGFloat)
+    func updateContentOffset(_ delta: CGFloat)
     
-    func infiniteScrollViewWillBeginDecelerating(scrollView: UIScrollView)
+    func infiniteScrollViewWillBeginDecelerating(_ scrollView: UIScrollView)
     
-    func infiniteScrollViewWillBeginDragging(scrollView: UIScrollView)
+    func infiniteScrollViewWillBeginDragging(_ scrollView: UIScrollView)
     
-    func infinitScrollViewDidScroll(scrollView: UIScrollView)
+    func infinitScrollViewDidScroll(_ scrollView: UIScrollView)
     
-    func infiniteScrollViewDidEndCenterScrolling(item: InfiniteItem)
+    func infiniteScrollViewDidEndCenterScrolling(_ item: InfiniteItem)
     
-    func infiniteScrollViewDidShowCenterItem(item: InfiniteItem)
+    func infiniteScrollViewDidShowCenterItem(_ item: InfiniteItem)
 }
 
 public final class InfiniteScrollView: UIScrollView {
@@ -57,11 +57,11 @@ public final class InfiniteScrollView: UIScrollView {
     public weak var infiniteDataSource : InfiniteScrollViewDataSource!
     public weak var infiniteDelegate : InfiniteScrollViewDelegate?
     
-    public private(set) var items : [InfiniteItem] = []
+    public fileprivate(set) var items : [InfiniteItem] = []
     
     public var scrolling : Int = 0
-    private var lastReportedItemIndex : Int = Int.min
-    private var isUserScrolling = false
+    fileprivate var lastReportedItemIndex : Int = Int.min
+    fileprivate var isUserScrolling = false
     
     // MARK: - Constructor
     
@@ -75,7 +75,7 @@ public final class InfiniteScrollView: UIScrollView {
         self.commonInit()
     }
     
-    private func commonInit() {
+    fileprivate func commonInit() {
         self.delegate = self
         self.autoresizesSubviews = false
         self.bounces = false
@@ -120,7 +120,7 @@ public final class InfiniteScrollView: UIScrollView {
         
         if self.scrolling == 0 {
             var delta = self.contentSize.width / 2 - bounds.midX
-            let allow = self.pagingEnabled ? !self.decelerating : true
+            let allow = self.isPagingEnabled ? !self.isDecelerating : true
             
             if allow && fabs(delta) > visible {
                 delta = visible * (delta > 0 ? 1 : -1)
@@ -153,12 +153,12 @@ public final class InfiniteScrollView: UIScrollView {
             index = _item.index
             endEdge = _item.view.frame.maxX
         } else {
-            endEdge = self.placeNewItem(.Middle, edge: 0, index: 0)
+            endEdge = self.placeNewItem(.middle, edge: 0, index: 0)
         }
         
         while (endEdge < maxVisible) {
             index += 1
-            endEdge = self.placeNewItem(.End, edge: endEdge, index: index)
+            endEdge = self.placeNewItem(.end, edge: endEdge, index: index)
         }
         
         let firstItem = self.items.first
@@ -171,7 +171,7 @@ public final class InfiniteScrollView: UIScrollView {
         
         while (startEdge > minVisible) {
             index -= 1
-            startEdge = self.placeNewItem(.Start, edge: startEdge, index: index)
+            startEdge = self.placeNewItem(.start, edge: startEdge, index: index)
         }
         
         if self.scrolling == 0 && self.items.count > 0 {
@@ -185,7 +185,7 @@ public final class InfiniteScrollView: UIScrollView {
             var firsted = self.items.first
             while (firsted != nil && firsted!.view.frame.maxX <= minVisible) {
                 firsted!.view.removeFromSuperview()
-                self.items.removeAtIndex(0)
+                self.items.remove(at: 0)
                 firsted = self.items.first
             }
         }
@@ -201,34 +201,34 @@ public final class InfiniteScrollView: UIScrollView {
     
     // MARK: - Public Functions
     
-    public func itemAtView(view: UIView) -> InfiniteItem? {
+    public func itemAtView(_ view: UIView) -> InfiniteItem? {
         return self.items.filter() { item in return item.view === view }.first
     }
     
-    public func itemAtIndex(index: Int) -> InfiniteItem? {
+    public func itemAtIndex(_ index: Int) -> InfiniteItem? {
         return self.items.filter() { item in return item.index == index }.first
     }
     
-    public func updateItems(handler: (InfiniteItem -> InfiniteItem)) {
+    public func updateItems(_ handler: ((InfiniteItem) -> InfiniteItem)) {
         self.items = self.items.map(handler)
     }
     
     public func reset() {
         self.subviews.forEach() { $0.removeFromSuperview() }
-        self.items.removeAll(keepCapacity: true)
+        self.items.removeAll(keepingCapacity: true)
     }
     
     public func reloadViews() {
         guard self.infiniteDataSource.totalItemCount() > 0 else { return }
         
         if let _targetItem = self.itemAtCenterPosition() {
-            self.reloadView(.Start, item: _targetItem, edge: _targetItem.view.frame.midX)
+            self.reloadView(.start, item: _targetItem, edge: _targetItem.view.frame.midX)
             
             var previousItem = _targetItem
             var item = self.itemAtIndex(previousItem.index + 1)
             
             while (item != nil) {
-                self.reloadView(.End, item: item!, edge: previousItem.view.frame.maxX)
+                self.reloadView(.end, item: item!, edge: previousItem.view.frame.maxX)
                 previousItem = item!
                 item = self.itemAtIndex(previousItem.index + 1)
             }
@@ -237,7 +237,7 @@ public final class InfiniteScrollView: UIScrollView {
             item = self.itemAtIndex(previousItem.index - 1)
             
             while (item != nil) {
-                self.reloadView(.End, item: item!, edge: previousItem.view.frame.maxX)
+                self.reloadView(.end, item: item!, edge: previousItem.view.frame.maxX)
                 previousItem = item!
                 item = self.itemAtIndex(previousItem.index - 1)
             }
@@ -247,7 +247,7 @@ public final class InfiniteScrollView: UIScrollView {
         }
     }
     
-    public func reloadView(position: XPosition, item: InfiniteItem, edge: CGFloat) {
+    public func reloadView(_ position: XPosition, item: InfiniteItem, edge: CGFloat) {
         guard self.infiniteDataSource.totalItemCount() > 0 else { return }
       
         let convertIndex = self.convertIndex(item.index)
@@ -256,11 +256,11 @@ public final class InfiniteScrollView: UIScrollView {
         let view = (self.infiniteDataSource.viewForIndex(convertIndex))
         
         switch position {
-        case .Start:
+        case .start:
             item.view.frame = CGRect(x: edge - thickness, y: 0, width: thickness, height: bounds.size.height)
-        case .Middle:
+        case .middle:
             item.view.frame = CGRect(x: edge - thickness / 2.0, y: 0, width: thickness, height: bounds.size.height)
-        case .End:
+        case .end:
             item.view.frame = CGRect(x: edge, y: 0, width: thickness, height: bounds.size.height)
         }
         
@@ -268,12 +268,12 @@ public final class InfiniteScrollView: UIScrollView {
         self.addSubview(view)
     }
     
-    public func resetWithIndex(index: Int) {
+    public func resetWithIndex(_ index: Int) {
         guard self.infiniteDataSource.totalItemCount() > 0 else { return }
         if self.bounds.isEmpty { return }
         
         self.reset()
-        self.placeNewItem(.Middle, edge: 0, index: index)
+        _ = self.placeNewItem(.middle, edge: 0, index: index)
         self.setNeedsLayout()
         self.layoutIfNeeded()
     }
@@ -289,7 +289,7 @@ public final class InfiniteScrollView: UIScrollView {
         return nil
     }
     
-    public func scrollToCenter(index: Int, offset: CGFloat, animated: Bool, animation: (Void -> Void)?, completion: (Void -> Void)?) {
+    public func scrollToCenter(_ index: Int, offset: CGFloat, animated: Bool, animation: ((Void) -> Void)?, completion: ((Void) -> Void)?) {
         guard self.infiniteDataSource.totalItemCount() > 0 else { return }
         if self.bounds.isEmpty { return }
       
@@ -318,7 +318,7 @@ public final class InfiniteScrollView: UIScrollView {
                 gapItemIndex += isStart ? 1 : -1
                 let item = self.createItem(gapItemIndex)
                 
-                isStart ? newItems.append(item) : newItems.insert(item, atIndex: 0)
+                isStart ? newItems.append(item) : newItems.insert(item, at: 0)
                 
                 gap -= item.thickness
                 indexDelta -= 1
@@ -332,7 +332,7 @@ public final class InfiniteScrollView: UIScrollView {
                     item.view.frame = CGRect(x: startEdge - item.thickness, y: 0, width: item.thickness, height: bounds.size.height)
                     startEdge = item.view.frame.minX
                     self.addSubview(item.view)
-                    self.items.insert(item, atIndex: 0)
+                    self.items.insert(item, at: 0)
                     
                     newItemIndex -= 1
                 }
@@ -358,7 +358,7 @@ public final class InfiniteScrollView: UIScrollView {
         self.setContentOffset(self.contentOffset, animated: false)
       
         if animated {
-            UIView.animateKeyframesWithDuration(0.25, delay: 0, options: .BeginFromCurrentState, animations: {
+            UIView.animateKeyframes(withDuration: 0.25, delay: 0, options: .beginFromCurrentState, animations: {
                 self.bounds = bounds
                 animation?()
             }, completion: { finished in
@@ -374,11 +374,11 @@ public final class InfiniteScrollView: UIScrollView {
         }
     }
     
-    public func scrollToCenter(index: Int, animated: Bool, animation: (Void -> Void)?, completion: (Void -> Void)?) {
+    public func scrollToCenter(_ index: Int, animated: Bool, animation: ((Void) -> Void)?, completion: ((Void) -> Void)?) {
         self.scrollToCenter(index, offset: 0, animated: animated, animation: animation, completion: completion)
     }
     
-    public func convertIndex(scrollViewIndex: Int) -> Int {
+    public func convertIndex(_ scrollViewIndex: Int) -> Int {
         let total = self.infiniteDataSource.totalItemCount()
         let currentIndex = scrollViewIndex >= 0 ? (scrollViewIndex % total) : (total - (-scrollViewIndex % total))
         
@@ -387,7 +387,7 @@ public final class InfiniteScrollView: UIScrollView {
   
     // MARK: - Private Functions
     
-    private func createItem(index: Int) -> InfiniteItem {
+    fileprivate func createItem(_ index: Int) -> InfiniteItem {
         let convertIndex = self.convertIndex(index)
         let bounds = self.bounds
         let thickness = CGFloat(ceilf(Float(self.infiniteDataSource.thicknessForIndex(convertIndex))))
@@ -398,21 +398,21 @@ public final class InfiniteScrollView: UIScrollView {
         return InfiniteItem(index, thickness, view)
     }
     
-    private func placeNewItem(position: XPosition, edge: CGFloat, index: Int) -> CGFloat {
+    fileprivate func placeNewItem(_ position: XPosition, edge: CGFloat, index: Int) -> CGFloat {
         let item = self.createItem(index)
         
         switch position {
-        case .Start:
+        case .start:
             item.view.frame.origin.x = edge - item.thickness
             self.addSubview(item.view)
-            self.items.insert(item, atIndex: 0)
+            self.items.insert(item, at: 0)
             return item.view.frame.minX
-        case .Middle:
+        case .middle:
             item.view.frame.origin.x = bounds.origin.x + (bounds.size.width - item.thickness) / 2.0
             self.addSubview(item.view)
             self.items.append(item)
             return item.view.frame.maxX
-        case .End:
+        case .end:
             item.view.frame.origin.x = edge
             self.addSubview(item.view)
             self.items.append(item)
@@ -425,20 +425,20 @@ public final class InfiniteScrollView: UIScrollView {
 
 extension InfiniteScrollView: UIScrollViewDelegate {
     
-    public func scrollViewWillBeginDecelerating(scrollView: UIScrollView) {
+    public func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         self.infiniteDelegate?.infiniteScrollViewWillBeginDecelerating(scrollView)
     }
     
-    public func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.infiniteDelegate?.infiniteScrollViewWillBeginDragging(scrollView)
         self.isUserScrolling = true
     }
     
-    public func scrollViewDidScroll(scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.infiniteDelegate?.infinitScrollViewDidScroll(scrollView)
     }
     
-    public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         self.isUserScrolling = false
         
         if let _targetItem = self.itemAtCenterPosition() {
@@ -447,7 +447,7 @@ extension InfiniteScrollView: UIScrollViewDelegate {
         }
     }
     
-    public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if decelerate { return }
         self.isUserScrolling = false
         

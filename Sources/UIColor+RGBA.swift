@@ -19,22 +19,22 @@ public struct RGBA {
 public extension UIColor {
     
     public func getRGBAStruct() -> RGBA {
-        let components = CGColorGetComponents(self.CGColor)
-        let colorSpaceModel = CGColorSpaceGetModel(CGColorGetColorSpace(self.CGColor))
+        let components = self.cgColor.components
+        let colorSpaceModel = self.cgColor.colorSpace?.model
         
-        if colorSpaceModel.rawValue == CGColorSpaceModel.RGB.rawValue && CGColorGetNumberOfComponents(self.CGColor) == 4 {
+        if colorSpaceModel?.rawValue == CGColorSpaceModel.rgb.rawValue && self.cgColor.numberOfComponents == 4 {
             return RGBA(
-                red: components[0],
-                green: components[1],
-                blue: components[2],
-                alpha: components[3]
+                red: components![0],
+                green: components![1],
+                blue: components![2],
+                alpha: components![3]
             )
-        } else if colorSpaceModel.rawValue == CGColorSpaceModel.Monochrome.rawValue && CGColorGetNumberOfComponents(self.CGColor) == 2 {
+        } else if colorSpaceModel?.rawValue == CGColorSpaceModel.monochrome.rawValue && self.cgColor.numberOfComponents == 2 {
             return RGBA(
-                red: components[0],
-                green: components[0],
-                blue: components[0],
-                alpha: components[1]
+                red: components![0],
+                green: components![0],
+                blue: components![0],
+                alpha: components![1]
             )
         } else {
             return RGBA()

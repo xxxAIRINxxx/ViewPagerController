@@ -10,45 +10,45 @@ import Foundation
 import UIKit
 
 public enum ObservingScrollViewType {
-    case None
-    case Header
-    case NavigationBar(targetNavigationBar : UINavigationBar)
+    case none
+    case header
+    case navigationBar(targetNavigationBar : UINavigationBar)
 }
 
 public final class ViewPagerController: UIViewController {
     
     // MARK: - Public Handler Properties
     
-    public var didShowViewControllerHandler : (UIViewController -> Void)?
+    public var didShowViewControllerHandler : ((UIViewController) -> Void)?
     
-    public var updateSelectedViewHandler : (UIView -> Void)?
+    public var updateSelectedViewHandler : ((UIView) -> Void)?
     
-    public var willBeginTabMenuUserScrollingHandler : (UIView -> Void)?
+    public var willBeginTabMenuUserScrollingHandler : ((UIView) -> Void)?
     
-    public var didEndTabMenuUserScrollingHandler : (UIView -> Void)?
+    public var didEndTabMenuUserScrollingHandler : ((UIView) -> Void)?
     
-    public var didChangeHeaderViewHeightHandler : (CGFloat -> Void)?
+    public var didChangeHeaderViewHeightHandler : ((CGFloat) -> Void)?
     
-    public var changeObserveScrollViewHandler : (UIViewController -> UIScrollView?)?
+    public var changeObserveScrollViewHandler : ((UIViewController) -> UIScrollView?)?
     
-    public var didScrollContentHandler : (CGFloat -> Void)?
+    public var didScrollContentHandler : ((CGFloat) -> Void)?
     
     // MARK: - Custom Settings Properties
     
-    public private(set) var headerViewHeight : CGFloat = 0.0
-    public private(set) var tabMenuViewHeight : CGFloat = 0.0
+    public fileprivate(set) var headerViewHeight : CGFloat = 0.0
+    public fileprivate(set) var tabMenuViewHeight : CGFloat = 0.0
     
     // ScrollHeaderSupport
-    public private(set) var scrollViewMinPositionY : CGFloat = 0.0
-    public private(set) var scrollViewObservingDelay : CGFloat = 0.0
-    public private(set) var scrollViewObservingType : ObservingScrollViewType = .None {
+    public fileprivate(set) var scrollViewMinPositionY : CGFloat = 0.0
+    public fileprivate(set) var scrollViewObservingDelay : CGFloat = 0.0
+    public fileprivate(set) var scrollViewObservingType : ObservingScrollViewType = .none {
         didSet {
             switch self.scrollViewObservingType {
-            case .Header:
+            case .header:
                 self.targetNavigationBar = nil
-            case .NavigationBar(let targetNavigationBar):
+            case .navigationBar(let targetNavigationBar):
                 self.targetNavigationBar = targetNavigationBar
-            case .None:
+            case .none:
                 self.targetNavigationBar = nil
                 self.observingScrollView = nil
             }
@@ -79,7 +79,7 @@ public final class ViewPagerController: UIViewController {
     // MARK: - Override
     
     deinit {
-        self.scrollViewObservingType = .None
+        self.scrollViewObservingType = .none
     }
     
     public override func viewDidLoad() {
@@ -94,7 +94,7 @@ public final class ViewPagerController: UIViewController {
         self.updateAppearance(ViewPagerControllerAppearance())
     }
     
-    public override func viewDidDisappear(animated: Bool) {
+    public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         self.tabMenuView.stopScrolling(self.containerView.currentIndex() ?? 0)
@@ -104,7 +104,7 @@ public final class ViewPagerController: UIViewController {
     
     // MARK: - Public Functions
     
-    public func updateAppearance(appearance: ViewPagerControllerAppearance) {
+    public func updateAppearance(_ appearance: ViewPagerControllerAppearance) {
         // Header
         self.headerViewHeight = appearance.headerHeight
         self.headerViewHeightConstraint.constant = self.headerViewHeight
@@ -128,31 +128,31 @@ public final class ViewPagerController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
-    public func setParentController(controller: UIViewController, parentView: UIView) {
+    public func setParentController(_ controller: UIViewController, parentView: UIView) {
         controller.automaticallyAdjustsScrollViewInsets = false
         controller.addChildViewController(self)
         
         parentView.addSubview(self.view)
         
-        self.viewTopConstraint = parentView.addPin(self.view, attribute: .Top, toView: parentView, constant: 0.0)
-        parentView.addPin(self.view, attribute: .Bottom, toView: parentView, constant: 0.0)
-        parentView.addPin(self.view, attribute: .Left, toView: parentView, constant: 0.0)
-        parentView.addPin(self.view, attribute: .Right, toView: parentView, constant: 0.0)
+        self.viewTopConstraint = parentView.addPin(self.view, attribute: .top, toView: parentView, constant: 0.0)
+        _ = parentView.addPin(self.view, attribute: .bottom, toView: parentView, constant: 0.0)
+        _ = parentView.addPin(self.view, attribute: .left, toView: parentView, constant: 0.0)
+        _ = parentView.addPin(self.view, attribute: .right, toView: parentView, constant: 0.0)
         
-        self.didMoveToParentViewController(controller)
+        self.didMove(toParentViewController: controller)
     }
     
-    public func addContent(title: String, viewController: UIViewController) {
+    public func addContent(_ title: String, viewController: UIViewController) {
         self.tabMenuView.addTitle(title)
         self.addChildViewController(viewController)
         self.containerView.addViewController(viewController)
     }
     
-    public func removeContent(viewController: UIViewController) {
+    public func removeContent(_ viewController: UIViewController) {
         guard let index = self.containerView.indexFromViewController(viewController) else { return }
         
         if self.childViewControllers.contains(viewController) {
-            viewController.willMoveToParentViewController(nil)
+            viewController.willMove(toParentViewController: nil)
             
             self.tabMenuView.removeContentAtIndex(index)
             self.containerView.removeContent(viewController)
@@ -167,27 +167,27 @@ public final class ViewPagerController: UIViewController {
   
     // MARK: - Private Functions
     
-    private func setupConstraint() {
+    fileprivate func setupConstraint() {
         // Header
-        self.view.addPin(self.headerView, attribute: .Top, toView: self.view, constant: 0.0)
+        _ = self.view.addPin(self.headerView, attribute: .top, toView: self.view, constant: 0.0)
         self.headerViewHeightConstraint = self.headerView.addHeightConstraint(self.headerView, constant: self.headerViewHeight)
-        self.view.addPin(self.headerView, attribute: .Left, toView: self.view, constant: 0.0)
-        self.view.addPin(self.headerView, attribute: .Right, toView: self.view, constant: 0.0)
+        _ = self.view.addPin(self.headerView, attribute: .left, toView: self.view, constant: 0.0)
+        _ = self.view.addPin(self.headerView, attribute: .right, toView: self.view, constant: 0.0)
         
         // Tab Menu
-        self.view.addPin(self.tabMenuView, isWithViewTop: true, toView: self.headerView, isToViewTop: false, constant: 0.0)
+        _ = self.view.addPin(self.tabMenuView, isWithViewTop: true, toView: self.headerView, isToViewTop: false, constant: 0.0)
         self.tabMenuViewHeightConstraint = self.tabMenuView.addHeightConstraint(self.tabMenuView, constant: self.tabMenuViewHeight)
-        self.view.addPin(self.tabMenuView, attribute: .Left, toView: self.view, constant: 0.0)
-        self.view.addPin(self.tabMenuView, attribute: .Right, toView: self.view, constant: 0.0)
+        _ = self.view.addPin(self.tabMenuView, attribute: .left, toView: self.view, constant: 0.0)
+        _ = self.view.addPin(self.tabMenuView, attribute: .right, toView: self.view, constant: 0.0)
         
         // Container
-        self.view.addPin(self.containerView, isWithViewTop: true, toView: self.tabMenuView, isToViewTop: false, constant: 0.0)
-        self.view.addPin(self.containerView, attribute: .Bottom, toView: self.view, constant: 0.0)
-        self.view.addPin(self.containerView, attribute: .Left, toView: self.view, constant: 0.0)
-        self.view.addPin(self.containerView, attribute: .Right, toView: self.view, constant: 0.0)
+        _ = self.view.addPin(self.containerView, isWithViewTop: true, toView: self.tabMenuView, isToViewTop: false, constant: 0.0)
+        _ = self.view.addPin(self.containerView, attribute: .bottom, toView: self.view, constant: 0.0)
+        _ = self.view.addPin(self.containerView, attribute: .left, toView: self.view, constant: 0.0)
+        _ = self.view.addPin(self.containerView, attribute: .right, toView: self.view, constant: 0.0)
     }
     
-    private func setupHandler() {
+    fileprivate func setupHandler() {
         self.tabMenuView.selectedIndexHandler = { [weak self] index in
             self?.containerView.scrollToCenter(index, animated: true, animation: nil, completion: nil)
         }
@@ -224,13 +224,13 @@ public final class ViewPagerController: UIViewController {
         }
     }
     
-    private func startScrollViewContentOffsetObserving() {
+    fileprivate func startScrollViewContentOffsetObserving() {
         if let _observingScrollView = self.observingScrollView {
-            _observingScrollView.addObserver(self, forKeyPath: "contentOffset", options: [.Old, .New], context: nil)
+            _observingScrollView.addObserver(self, forKeyPath: "contentOffset", options: [.old, .new], context: nil)
         }
     }
     
-    private func stopScrollViewContentOffsetObserving() {
+    fileprivate func stopScrollViewContentOffsetObserving() {
         if let _observingScrollView = self.observingScrollView {
             _observingScrollView.removeObserver(self, forKeyPath: "contentOffset")
         }

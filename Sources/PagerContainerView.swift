@@ -8,36 +8,56 @@
 
 import Foundation
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 public final class PagerContainerView: UIView {
     
     // MARK: - Public Handler Properties
     
-    public var didShowViewControllerHandler : (UIViewController -> Void)?
+    public var didShowViewControllerHandler : ((UIViewController) -> Void)?
     
-    public var startSyncHandler : (Int -> Void)?
+    public var startSyncHandler : ((Int) -> Void)?
     
-    public var syncOffsetHandler : ((currentIndex: Int, percentComplete: CGFloat, scrollingTowards: Bool) -> Void)?
+    public var syncOffsetHandler : ((_ currentIndex: Int, _ percentComplete: CGFloat, _ scrollingTowards: Bool) -> Void)?
     
-    public var finishSyncHandler : (Int -> Void)?
+    public var finishSyncHandler : ((Int) -> Void)?
     
     // MARK: - Private Properties
     
-    private lazy var scrollView : InfiniteScrollView = {
+    fileprivate lazy var scrollView : InfiniteScrollView = {
         var scrollView = InfiniteScrollView(frame: self.bounds)
         scrollView.infiniteDataSource = self
         scrollView.infiniteDelegate = self
-        scrollView.backgroundColor = UIColor.clearColor()
+        scrollView.backgroundColor = UIColor.clear
         return scrollView
     }()
     
     // Contents
-    private var contents : [UIViewController] = []
+    fileprivate var contents : [UIViewController] = []
     
     // Sync ContainerView Scrolling
     public var scrollingIncrementalRatio: CGFloat = 1.1
-    private var startDraggingOffsetX : CGFloat?
-    private var startDraggingIndex : Int?
+    fileprivate var startDraggingOffsetX : CGFloat?
+    fileprivate var startDraggingIndex : Int?
     
     // MARK: - Constructor
     
@@ -51,9 +71,9 @@ public final class PagerContainerView: UIView {
         self.commonInit()
     }
     
-    private func commonInit() {
+    fileprivate func commonInit() {
         self.addSubview(self.scrollView)
-        self.scrollView.pagingEnabled = true
+        self.scrollView.isPagingEnabled = true
         self.scrollView.scrollsToTop = false
         
         self.setupConstraint()
@@ -68,16 +88,16 @@ public final class PagerContainerView: UIView {
     
     // MARK: - Public Functions
     
-    public func addViewController(viewController: UIViewController) {
+    public func addViewController(_ viewController: UIViewController) {
         self.contents.append(viewController)
         self.scrollView.reloadViews()
     }
     
-    public func indexFromViewController(viewController: UIViewController) -> Int? {
-        return self.contents.indexOf(viewController)
+    public func indexFromViewController(_ viewController: UIViewController) -> Int? {
+        return self.contents.index(of: viewController)
     }
     
-    public func removeContent(viewController: UIViewController) {
+    public func removeContent(_ viewController: UIViewController) {
         if let content = self.contents.filter({ $0 === viewController }).first {
             self.contents = self.contents.filter() { $0 !== content }
             self.scrollView.reset()
@@ -85,8 +105,8 @@ public final class PagerContainerView: UIView {
         }
     }
     
-    public func scrollToCenter(index: Int, animated: Bool, animation: (Void -> Void)?, completion: (Void -> Void)?) {
-        if !self.scrollView.dragging {
+    public func scrollToCenter(_ index: Int, animated: Bool, animation: ((Void) -> Void)?, completion: ((Void) -> Void)?) {
+        if !self.scrollView.isDragging {
             let _index = self.currentIndex()
             if _index == index { return }
             if _index > index {
@@ -111,7 +131,7 @@ public final class PagerContainerView: UIView {
     }
   
     public func currentContent() -> UIViewController? {
-        guard let _index = self.currentIndex() where _index != Int.min else { return nil }
+        guard let _index = self.currentIndex() , _index != Int.min else { return nil }
       
         return self.contents[self.scrollView.convertIndex(_index)]
     }
@@ -121,7 +141,7 @@ public final class PagerContainerView: UIView {
 
 extension PagerContainerView {
     
-    private func setupConstraint() {
+    fileprivate func setupConstraint() {
         self.allPin(self.scrollView)
     }
 }
@@ -130,7 +150,7 @@ extension PagerContainerView {
 
 extension PagerContainerView {
     
-    private func finishSyncViewScroll(index: Int) {
+    fileprivate func finishSyncViewScroll(_ index: Int) {
         self.finishSyncHandler?(index)
         self.startDraggingOffsetX = nil
         self.scrollView.setNeedsLayout()
@@ -146,12 +166,12 @@ extension PagerContainerView: InfiniteScrollViewDataSource {
         return self.contents.count
     }
     
-    public func viewForIndex(index: Int) -> UIView {
+    public func viewForIndex(_ index: Int) -> UIView {
         let controller = self.contents[index]
         return controller.view
     }
     
-    public func thicknessForIndex(index: Int) -> CGFloat {
+    public func thicknessForIndex(_ index: Int) -> CGFloat {
         return self.frame.size.width
     }
 }
@@ -160,13 +180,13 @@ extension PagerContainerView: InfiniteScrollViewDataSource {
 
 extension PagerContainerView: InfiniteScrollViewDelegate {
     
-    public func updateContentOffset(delta: CGFloat) {
+    public func updateContentOffset(_ delta: CGFloat) {
         self.startDraggingOffsetX? += delta
     }
     
-    public func infiniteScrollViewWillBeginDecelerating(scrollView: UIScrollView) {}
+    public func infiniteScrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {}
     
-    public func infiniteScrollViewWillBeginDragging(scrollView: UIScrollView) {
+    public func infiniteScrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if let _currentItem = self.scrollView.itemAtCenterPosition() {
             if self.startDraggingOffsetX == nil {
                 self.startSyncHandler?(_currentItem.index)
@@ -176,7 +196,7 @@ extension PagerContainerView: InfiniteScrollViewDelegate {
         }
     }
     
-    public func infinitScrollViewDidScroll(scrollView: UIScrollView) {
+    public func infinitScrollViewDidScroll(_ scrollView: UIScrollView) {
         if let _startDraggingOffsetX = self.startDraggingOffsetX {
             let offsetX = scrollView.contentOffset.x
             let scrollingTowards = _startDraggingOffsetX > offsetX
@@ -185,16 +205,16 @@ extension PagerContainerView: InfiniteScrollViewDelegate {
             let _percentComplete =  min(1.0, percentComplete)
             
             if let _currentItem = self.scrollView.itemAtCenterPosition() {
-                self.syncOffsetHandler?(currentIndex: _currentItem.index, percentComplete: _percentComplete, scrollingTowards: scrollingTowards)
+                self.syncOffsetHandler?(_currentItem.index, _percentComplete, scrollingTowards)
             }
         } else {
-            if scrollView.dragging {
+            if scrollView.isDragging {
                 self.startDraggingOffsetX = ceil(scrollView.contentOffset.x)
             }
         }
     }
     
-    public func infiniteScrollViewDidEndCenterScrolling(item: InfiniteItem) {
+    public func infiniteScrollViewDidEndCenterScrolling(_ item: InfiniteItem) {
         guard self.startDraggingOffsetX != nil else { return }
         
         if let _currentItem = self.scrollView.itemAtCenterPosition() {
@@ -203,7 +223,7 @@ extension PagerContainerView: InfiniteScrollViewDelegate {
         }
     }
     
-    public func infiniteScrollViewDidShowCenterItem(item: InfiniteItem) {
+    public func infiniteScrollViewDidShowCenterItem(_ item: InfiniteItem) {
         guard let controller = self.contents.filter({ $0.view === item.view }).first else { return }
         self.didShowViewControllerHandler?(controller)
     }
