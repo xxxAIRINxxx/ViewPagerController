@@ -105,7 +105,7 @@ public final class PagerContainerView: UIView {
         }
     }
     
-    public func scrollToCenter(_ index: Int, animated: Bool, animation: ((Void) -> Void)?, completion: ((Void) -> Void)?) {
+    public func scrollToCenter(_ index: Int, animated: Bool, animation: (() -> Void)?, completion: (() -> Void)?) {
         if !self.scrollView.isDragging {
             let _index = self.currentIndex()
             if _index == index { return }

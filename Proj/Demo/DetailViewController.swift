@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     weak var parentController : UIViewController?
     
@@ -34,7 +34,7 @@ class DetailViewController: UIViewController {
         return 40
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) 
         cell.textLabel?.text = self.title
         return cell
@@ -42,7 +42,7 @@ class DetailViewController: UIViewController {
     
     // MARK: - UITableViewDelegate
     
-    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

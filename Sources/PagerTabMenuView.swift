@@ -186,8 +186,8 @@ public final class PagerTabMenuView: UIView {
         self.reload()
     }
     
-    public func scrollToCenter(_ index: Int, animated: Bool, animation: ((Void) -> Void)?, completion: ((Void) -> Void)?) {
-        self.scrollView.scrollToCenter(index, animated: animated, animation: animation, completion: completion)
+    public func scrollToCenter(_ index: Int, animated: Bool, animation: (() -> Void)?, completion: (() -> Void)?) {
+        self.scrollView.scrollToCenter(index, animated: animated, animation: animation!, completion: completion!)
     }
     
     public func stopScrolling(_ index: Int) {
@@ -321,7 +321,7 @@ extension PagerTabMenuView {
         return button
     }
     
-    public func tabMenuButtonTapped(_ sender: UIButton) {
+    @objc public func tabMenuButtonTapped(_ sender: UIButton) {
         if let _item = self.scrollView.itemAtView(sender) {
             self.updateCenterItem(_item, animated: true)
             self.selectedIndexHandler?(_item.index)
@@ -349,8 +349,8 @@ extension UIButton {
         
         self.setAttributedTitle(NSAttributedString(string: _title, attributes:
             [
-                NSFontAttributeName: font,
-                NSForegroundColorAttributeName: textColor,
+                NSAttributedStringKey.font: font,
+                NSAttributedStringKey.foregroundColor: textColor,
             ]
             ), for: state)
     }
@@ -436,8 +436,8 @@ extension PagerTabMenuView: InfiniteScrollViewDataSource {
     
     public func thicknessForIndex(_ index: Int) -> CGFloat {
         let title = self.useTitles[index]
-        let fontAttr: [String : AnyObject] = [NSFontAttributeName : self.selectedTitleFont]
-        var width = NSString(string: title).size(attributes: fontAttr).width
+        let fontAttr: [NSAttributedStringKey : Any] = [NSAttributedStringKey.font : self.selectedTitleFont]
+        var width = NSString(string: title).size(withAttributes: fontAttr).width
         if width < self.titleMinWidth {
             width = self.titleMinWidth
         }

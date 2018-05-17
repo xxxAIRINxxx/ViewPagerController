@@ -289,7 +289,7 @@ public final class InfiniteScrollView: UIScrollView {
         return nil
     }
     
-    public func scrollToCenter(_ index: Int, offset: CGFloat, animated: Bool, animation: ((Void) -> Void)?, completion: ((Void) -> Void)?) {
+    public func scrollToCenter(_ index: Int, offset: CGFloat, animated: Bool, animation: (() -> Void)?, completion: (() -> Void)?) {
         guard self.infiniteDataSource.totalItemCount() > 0 else { return }
         if self.bounds.isEmpty { return }
       
@@ -374,7 +374,7 @@ public final class InfiniteScrollView: UIScrollView {
         }
     }
     
-    public func scrollToCenter(_ index: Int, animated: Bool, animation: ((Void) -> Void)?, completion: ((Void) -> Void)?) {
+    public func scrollToCenter(_ index: Int, animated: Bool, animation: (() -> Void)?, completion: (() -> Void)?) {
         self.scrollToCenter(index, offset: 0, animated: animated, animation: animation, completion: completion)
     }
     

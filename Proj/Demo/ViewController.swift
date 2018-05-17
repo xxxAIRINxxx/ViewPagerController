@@ -9,7 +9,7 @@
 import UIKit
 import ViewPagerController
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     @IBOutlet weak var layerView : UIView!
     
@@ -53,9 +53,9 @@ class ViewController: UIViewController {
         
         pagerController.didShowViewControllerHandler = { controller in
             print("call didShowViewControllerHandler")
-            print("controller : \(controller.title)")
+            print("controller : \(String(describing: controller.title))")
             let currentController = pagerController.currentContent()
-            print("currentContent : \(currentController?.title)")
+            print("currentContent : \(String(describing: currentController?.title))")
         }
         
         pagerController.changeObserveScrollViewHandler = { controller in
