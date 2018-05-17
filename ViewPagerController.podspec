@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ViewPagerController"
-  s.version      = "1.3.0"
+  s.version      = "2.0.0"
   s.summary      = "Infinite menu & view paging Controller. written in Swift."
   s.homepage     = "https://github.com/xxxAIRINxxx/ViewPagerController"
   s.license      = 'MIT'
@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/xxxAIRINxxx/ViewPagerController.git", :tag => s.version.to_s }
 
   s.requires_arc = true
-  s.platform     = :ios, '8.0'
+  s.platform     = :ios, '9.0'
 
   s.source_files = 'Sources/*.swift'
 end
