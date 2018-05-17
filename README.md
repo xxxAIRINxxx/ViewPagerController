@@ -1,8 +1,8 @@
 # ViewPagerController
 
-[![Swift 3.0](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![Swift 4.1](https://img.shields.io/badge/Swift-4.1-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![Platforms iOS](https://img.shields.io/badge/Platforms-iOS-lightgray.svg?style=flat)](https://developer.apple.com/swift/)
-[![Xcode 8.0+](https://img.shields.io/badge/Xcode-8.0+-blue.svg?style=flat)](https://developer.apple.com/swift/)
+[![Xcode 9.3+](https://img.shields.io/badge/Xcode-9.3+-blue.svg?style=flat)](https://developer.apple.com/swift/)
 
 ![capture1](capture1.gif "capture1")
 
@@ -23,10 +23,14 @@
 
 ## Requirements
 
-* Xcode 8.0+
-* iOS 8.0+
-* Swift 3.0+
+* Xcode 9.3+
 * iPhone Portrait (iPad Not Supported)
+
+|            | OS                         | Swift         |
+|------------|------------------|--------------|
+| **v1.3.0** | iOS 8+ | 3.0      |
+| **v2.0.x** | iOS 9+ | 4.1      |
+
 
 ## Installation
 
