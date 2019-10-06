@@ -18,7 +18,7 @@ public struct RGBA {
 
 public extension UIColor {
     
-    public func getRGBAStruct() -> RGBA {
+    func getRGBAStruct() -> RGBA {
         let components = self.cgColor.components
         let colorSpaceModel = self.cgColor.colorSpace?.model
         

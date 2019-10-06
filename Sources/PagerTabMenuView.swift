@@ -276,7 +276,7 @@ extension PagerTabMenuView {
         let normal = self.defaultTitleColor.getRGBAStruct()
         let selected = self.selectedTitleColor.getRGBAStruct()
         
-        let absRatio = fabs(percentComplete)
+        let absRatio = abs(percentComplete)
         
         let prevColor = UIColor(
             red: normal.red * absRatio + selected.red * (1.0 - absRatio),
