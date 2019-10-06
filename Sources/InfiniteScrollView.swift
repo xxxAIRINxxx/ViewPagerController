@@ -122,7 +122,7 @@ public final class InfiniteScrollView: UIScrollView {
             var delta = self.contentSize.width / 2 - bounds.midX
             let allow = self.isPagingEnabled ? !self.isDecelerating : true
             
-            if allow && fabs(delta) > visible {
+            if allow && abs(delta) > visible {
                 delta = visible * (delta > 0 ? 1 : -1)
                 
                 self.delegate = nil

@@ -11,7 +11,7 @@ import UIKit
 
 public extension UIView {
     
-    public func checkTranslatesAutoresizing(_ withView: UIView?, toView: UIView?) {
+    func checkTranslatesAutoresizing(_ withView: UIView?, toView: UIView?) {
         if self.translatesAutoresizingMaskIntoConstraints == true {
             self.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -29,12 +29,12 @@ public extension UIView {
         }
     }
     
-    public func addPin(_ withView:UIView, attribute:NSLayoutAttribute, toView:UIView?, constant:CGFloat) -> NSLayoutConstraint {
+    func addPin(_ withView:UIView, attribute:NSLayoutConstraint.Attribute, toView:UIView?, constant:CGFloat) -> NSLayoutConstraint {
         checkTranslatesAutoresizing(withView, toView: toView)
         return addPinConstraint(self, withItem: withView, toItem: toView, attribute: attribute, constant: constant)
     }
     
-    public func addPin(_ withView:UIView, isWithViewTop:Bool, toView:UIView?, isToViewTop:Bool, constant:CGFloat) -> NSLayoutConstraint {
+    func addPin(_ withView:UIView, isWithViewTop:Bool, toView:UIView?, isToViewTop:Bool, constant:CGFloat) -> NSLayoutConstraint {
         checkTranslatesAutoresizing(withView, toView: toView)
         return addConstraint(
             self,
@@ -47,7 +47,7 @@ public extension UIView {
         )
     }
     
-    public func allPin(_ subView: UIView) {
+    func allPin(_ subView: UIView) {
         checkTranslatesAutoresizing(subView, toView: nil)
         _ = addPinConstraint(self, withItem: subView, toItem: self, attribute: .top, constant: 0.0)
         _ = addPinConstraint(self, withItem: subView, toItem: self, attribute: .bottom, constant: 0.0)
@@ -57,7 +57,7 @@ public extension UIView {
     
     // MARK: NSLayoutConstraint
     
-    public func addPinConstraint(_ parentView: UIView, withItem:UIView, toItem:UIView?, attribute:NSLayoutAttribute, constant:CGFloat) -> NSLayoutConstraint {
+    func addPinConstraint(_ parentView: UIView, withItem:UIView, toItem:UIView?, attribute:NSLayoutConstraint.Attribute, constant:CGFloat) -> NSLayoutConstraint {
         return addConstraint(
             parentView,
             relation: .equal,
@@ -69,7 +69,7 @@ public extension UIView {
         )
     }
     
-    public func addWidthConstraint(_ view: UIView, constant:CGFloat) -> NSLayoutConstraint {
+    func addWidthConstraint(_ view: UIView, constant:CGFloat) -> NSLayoutConstraint {
         return addConstraint(
             view,
             relation: .equal,
@@ -81,7 +81,7 @@ public extension UIView {
         )
     }
     
-    public func addHeightConstraint(_ view: UIView, constant:CGFloat) -> NSLayoutConstraint {
+    func addHeightConstraint(_ view: UIView, constant:CGFloat) -> NSLayoutConstraint {
         return addConstraint(
             view,
             relation: .equal,
@@ -93,7 +93,7 @@ public extension UIView {
         )
     }
     
-    public func addConstraint(_ addView: UIView, relation: NSLayoutRelation, withItem:UIView, withAttribute:NSLayoutAttribute, toItem:UIView?, toAttribute:NSLayoutAttribute, constant:CGFloat) -> NSLayoutConstraint {
+    func addConstraint(_ addView: UIView, relation: NSLayoutConstraint.Relation, withItem:UIView, withAttribute:NSLayoutConstraint.Attribute, toItem:UIView?, toAttribute:NSLayoutConstraint.Attribute, constant:CGFloat) -> NSLayoutConstraint {
         let constraint = NSLayoutConstraint(
             item: withItem,
             attribute: withAttribute,

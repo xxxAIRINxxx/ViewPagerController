@@ -130,7 +130,7 @@ public final class ViewPagerController: UIViewController {
     
     public func setParentController(_ controller: UIViewController, parentView: UIView) {
         controller.automaticallyAdjustsScrollViewInsets = false
-        controller.addChildViewController(self)
+        controller.addChild(self)
         
         parentView.addSubview(self.view)
         
@@ -139,25 +139,25 @@ public final class ViewPagerController: UIViewController {
         _ = parentView.addPin(self.view, attribute: .left, toView: parentView, constant: 0.0)
         _ = parentView.addPin(self.view, attribute: .right, toView: parentView, constant: 0.0)
         
-        self.didMove(toParentViewController: controller)
+        self.didMove(toParent: controller)
     }
     
     public func addContent(_ title: String, viewController: UIViewController) {
         self.tabMenuView.addTitle(title)
-        self.addChildViewController(viewController)
+        self.addChild(viewController)
         self.containerView.addViewController(viewController)
     }
     
     public func removeContent(_ viewController: UIViewController) {
         guard let index = self.containerView.indexFromViewController(viewController) else { return }
         
-        if self.childViewControllers.contains(viewController) {
-            viewController.willMove(toParentViewController: nil)
+        if self.children.contains(viewController) {
+            viewController.willMove(toParent: nil)
             
             self.tabMenuView.removeContentAtIndex(index)
             self.containerView.removeContent(viewController)
             
-            viewController.removeFromParentViewController()
+            viewController.removeFromParent()
         }
     }
     

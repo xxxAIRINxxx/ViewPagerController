@@ -94,7 +94,8 @@ public final class PagerContainerView: UIView {
     }
     
     public func indexFromViewController(_ viewController: UIViewController) -> Int? {
-        return self.contents.index(of: viewController)
+        return self.contents.firstIndex(of: viewController)
+        //return self.contents.index(of: viewController)
     }
     
     public func removeContent(_ viewController: UIViewController) {

@@ -276,7 +276,7 @@ extension PagerTabMenuView {
         let normal = self.defaultTitleColor.getRGBAStruct()
         let selected = self.selectedTitleColor.getRGBAStruct()
         
-        let absRatio = fabs(percentComplete)
+        let absRatio = abs(percentComplete)
         
         let prevColor = UIColor(
             red: normal.red * absRatio + selected.red * (1.0 - absRatio),
@@ -293,15 +293,15 @@ extension PagerTabMenuView {
         let currentButton = _currentItem.view as! UIButton
         let nextButton = _nextItem.view as! UIButton
         
-        currentButton.setTitleColor(prevColor, for: UIControlState())
-        nextButton.setTitleColor(nextColor, for: UIControlState())
+        currentButton.setTitleColor(prevColor, for: UIControl.State())
+        nextButton.setTitleColor(nextColor, for: UIControl.State())
         
         self.syncButtonTitleColor(currentButton, color: prevColor)
         self.syncButtonTitleColor(nextButton, color: nextColor)
     }
     
     internal func syncButtonTitleColor(_ button: UIButton, color: UIColor) {
-        button.setButtonTitleAttribute(self.defaultTitleFont, textColor: color, state: UIControlState())
+        button.setButtonTitleAttribute(self.defaultTitleFont, textColor: color, state: UIControl.State())
         button.setButtonTitleAttribute(self.highlightedTitleFont, textColor: color, state: .highlighted)
         button.setButtonTitleAttribute(self.selectedTitleFont, textColor: color, state: .selected)
     }
@@ -314,7 +314,7 @@ extension PagerTabMenuView {
     fileprivate func createTitleButton(_ title: String) -> UIButton {
         let button = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: self.titleMinWidth, height: self.frame.height))
         button.isExclusiveTouch = true
-        button.setTitle(title, for: UIControlState())
+        button.setTitle(title, for: UIControl.State())
         self.updateButtonTitleAttribute(button)
         button.addTarget(self, action: #selector(PagerTabMenuView.tabMenuButtonTapped(_:)), for: .touchUpInside)
         
@@ -336,7 +336,7 @@ extension PagerTabMenuView {
     }
     
     fileprivate func updateButtonTitleAttribute(_ button: UIButton) {
-        button.setButtonTitleAttribute(self.defaultTitleFont, textColor: self.defaultTitleColor, state: UIControlState())
+        button.setButtonTitleAttribute(self.defaultTitleFont, textColor: self.defaultTitleColor, state: UIControl.State())
         button.setButtonTitleAttribute(self.highlightedTitleFont, textColor: self.highlightedTitleColor, state: .highlighted)
         button.setButtonTitleAttribute(self.selectedTitleFont, textColor: self.selectedTitleColor, state: .selected)
     }
@@ -344,13 +344,13 @@ extension PagerTabMenuView {
 
 extension UIButton {
     
-    public func setButtonTitleAttribute(_ font: UIFont, textColor: UIColor, state: UIControlState) {
-        guard let _title = self.title(for: UIControlState()) else { return }
+    public func setButtonTitleAttribute(_ font: UIFont, textColor: UIColor, state: UIControl.State) {
+        guard let _title = self.title(for: UIControl.State()) else { return }
         
         self.setAttributedTitle(NSAttributedString(string: _title, attributes:
             [
-                NSAttributedStringKey.font: font,
-                NSAttributedStringKey.foregroundColor: textColor,
+                NSAttributedString.Key.font: font,
+                NSAttributedString.Key.foregroundColor: textColor,
             ]
             ), for: state)
     }
@@ -436,7 +436,7 @@ extension PagerTabMenuView: InfiniteScrollViewDataSource {
     
     public func thicknessForIndex(_ index: Int) -> CGFloat {
         let title = self.useTitles[index]
-        let fontAttr: [NSAttributedStringKey : Any] = [NSAttributedStringKey.font : self.selectedTitleFont]
+        let fontAttr: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font : self.selectedTitleFont]
         var width = NSString(string: title).size(withAttributes: fontAttr).width
         if width < self.titleMinWidth {
             width = self.titleMinWidth

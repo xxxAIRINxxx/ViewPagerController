@@ -65,7 +65,7 @@ class NavSampleViewController : UIViewController {
     }
     
     @objc fileprivate func remove() {
-        guard let c = self.pagerController?.childViewControllers.first else { return }
+        guard let c = self.pagerController?.children.first else { return }
         self.pagerController?.removeContent(c)
     }
     
