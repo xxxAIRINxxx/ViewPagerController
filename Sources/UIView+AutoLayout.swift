@@ -29,7 +29,7 @@ public extension UIView {
         }
     }
     
-    public func addPin(_ withView:UIView, attribute:NSLayoutAttribute, toView:UIView?, constant:CGFloat) -> NSLayoutConstraint {
+    public func addPin(_ withView:UIView, attribute:NSLayoutConstraint.Attribute, toView:UIView?, constant:CGFloat) -> NSLayoutConstraint {
         checkTranslatesAutoresizing(withView, toView: toView)
         return addPinConstraint(self, withItem: withView, toItem: toView, attribute: attribute, constant: constant)
     }
@@ -57,7 +57,7 @@ public extension UIView {
     
     // MARK: NSLayoutConstraint
     
-    public func addPinConstraint(_ parentView: UIView, withItem:UIView, toItem:UIView?, attribute:NSLayoutAttribute, constant:CGFloat) -> NSLayoutConstraint {
+    public func addPinConstraint(_ parentView: UIView, withItem:UIView, toItem:UIView?, attribute:NSLayoutConstraint.Attribute, constant:CGFloat) -> NSLayoutConstraint {
         return addConstraint(
             parentView,
             relation: .equal,
@@ -93,7 +93,7 @@ public extension UIView {
         )
     }
     
-    public func addConstraint(_ addView: UIView, relation: NSLayoutRelation, withItem:UIView, withAttribute:NSLayoutAttribute, toItem:UIView?, toAttribute:NSLayoutAttribute, constant:CGFloat) -> NSLayoutConstraint {
+    public func addConstraint(_ addView: UIView, relation: NSLayoutConstraint.Relation, withItem:UIView, withAttribute:NSLayoutConstraint.Attribute, toItem:UIView?, toAttribute:NSLayoutConstraint.Attribute, constant:CGFloat) -> NSLayoutConstraint {
         let constraint = NSLayoutConstraint(
             item: withItem,
             attribute: withAttribute,
